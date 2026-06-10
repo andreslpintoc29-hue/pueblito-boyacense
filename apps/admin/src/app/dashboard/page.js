@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 const modules = [
-  "Servicios",
-  "Eventos",
-  "Plazoletas",
-  "Galería",
-  "Configuración",
-  "Información útil",
+  { name: "Servicios", href: "/services" },
+  { name: "Eventos", href: null },
+  { name: "Plazoletas", href: null },
+  { name: "Galería", href: null },
+  { name: "Configuración", href: null },
+  { name: "Información útil", href: null },
 ];
 
 export default function DashboardPage() {
@@ -115,9 +115,9 @@ export default function DashboardPage() {
             textAlign: "left",
           }}
         >
-          {modules.map((name) => (
+          {modules.map((module) => (
             <div
-              key={name}
+              key={module.name}
               style={{
                 border: "1px solid #d8cdb8",
                 borderTop: "4px solid #A64B2A",
@@ -127,20 +127,36 @@ export default function DashboardPage() {
                 boxShadow: "0 4px 12px rgba(43, 33, 24, 0.05)",
               }}
             >
-              <h3 style={{ margin: "0 0 8px", color: "#2B2118" }}>{name}</h3>
-              <span
-                style={{
-                  display: "inline-block",
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  color: "#A64B2A",
-                  backgroundColor: "#F7F1E5",
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                }}
-              >
-                Pendiente de implementar
-              </span>
+              <h3 style={{ margin: "0 0 8px", color: "#2B2118" }}>
+                {module.name}
+              </h3>
+              {module.href ? (
+                <a
+                  href={module.href}
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.85rem",
+                    fontWeight: 600,
+                    color: "#1B5E20",
+                  }}
+                >
+                  Abrir módulo
+                </a>
+              ) : (
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.8rem",
+                    fontWeight: 600,
+                    color: "#A64B2A",
+                    backgroundColor: "#F7F1E5",
+                    padding: "4px 10px",
+                    borderRadius: "999px",
+                  }}
+                >
+                  Pendiente de implementar
+                </span>
+              )}
             </div>
           ))}
         </div>
