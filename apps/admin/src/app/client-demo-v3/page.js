@@ -344,6 +344,17 @@ const styles = {
     cursor: "pointer",
     boxShadow: "0 10px 24px rgba(166, 75, 42, 0.3)",
   },
+  btnDetailGreen: {
+    backgroundColor: colors.verde,
+    color: colors.white,
+    border: "none",
+    borderRadius: "12px",
+    padding: "14px 28px",
+    fontSize: "17px",
+    fontWeight: 700,
+    cursor: "pointer",
+    boxShadow: "0 10px 24px rgba(27, 94, 32, 0.3)",
+  },
   btnBack: {
     backgroundColor: "transparent",
     color: colors.terracotaDark,
@@ -481,16 +492,63 @@ const servicios = [
 
 const eventos = [
   {
+    id: "bazarte",
     title: "Bazarte",
     text: "Feria de arte y artesanía que reúne a creadores de toda la región.",
+    fecha: "15 y 16 de marzo (demo)",
+    lugar: "Plazoleta central, Pueblito Boyacense",
   },
   {
+    id: "pueblito-brilla",
     title: "Pueblito Brilla",
     text: "Espectáculo de luces e iluminación que transforma el pueblito.",
+    fecha: "Del 1 al 24 de diciembre (demo)",
+    lugar: "Todas las plazoletas, Pueblito Boyacense",
   },
   {
+    id: "semana-santa-cultural",
     title: "Semana Santa Cultural",
     text: "Tradición, fe y cultura en una celebración inolvidable.",
+    fecha: "Semana Santa (demo)",
+    lugar: "Capilla y plazoletas, Pueblito Boyacense",
+  },
+];
+
+const plazas = [
+  {
+    id: "villa-de-leyva",
+    title: "Villa de Leyva",
+    text: "Inspirada en la histórica villa colonial, con su amplia plaza empedrada y arquitectura blanca tradicional.",
+  },
+  {
+    id: "tibasosa",
+    title: "Tibasosa",
+    text: "Reconocida por la feijoa y sus tradiciones, refleja el ambiente cálido y dulce de la región.",
+  },
+  {
+    id: "tenza",
+    title: "Tenza",
+    text: "Tierra de artesanías en fique y tejidos, símbolo del trabajo manual boyacense.",
+  },
+  {
+    id: "sachica",
+    title: "Sáchica",
+    text: "Conocida por su tradición religiosa y los viñedos del valle, evoca fe y cultura.",
+  },
+  {
+    id: "el-cocuy",
+    title: "El Cocuy",
+    text: "Inspirada en la majestuosa sierra nevada, representa la naturaleza y la aventura.",
+  },
+  {
+    id: "mongui",
+    title: "Monguí",
+    text: "Catalogado entre los pueblos más bellos, destaca por su basílica y la elaboración de balones.",
+  },
+  {
+    id: "raquira",
+    title: "Ráquira",
+    text: "Capital artesanal de Colombia, famosa por su cerámica y colores vibrantes.",
   },
 ];
 
@@ -515,21 +573,39 @@ const panel = [
 
 export default function ClientDemoV3Page() {
   const [view, setView] = useState("home");
-  const [selectedId, setSelectedId] = useState(null);
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [selectedEventId, setSelectedEventId] = useState(null);
+  const [selectedPlazaId, setSelectedPlazaId] = useState(null);
 
   const selectedService =
-    servicios.find((s) => s.id === selectedId) || null;
+    servicios.find((s) => s.id === selectedServiceId) || null;
+  const selectedEvent =
+    eventos.find((e) => e.id === selectedEventId) || null;
+  const selectedPlaza =
+    plazas.find((p) => p.id === selectedPlazaId) || null;
 
   const goHome = () => {
     setView("home");
-    setSelectedId(null);
+    setSelectedServiceId(null);
+    setSelectedEventId(null);
+    setSelectedPlazaId(null);
   };
 
   const goServices = () => setView("services");
+  const goEvents = () => setView("events");
+  const goPlazas = () => setView("plazas");
 
-  const openDetail = (id) => {
-    setSelectedId(id);
-    setView("detail");
+  const openServiceDetail = (id) => {
+    setSelectedServiceId(id);
+    setView("serviceDetail");
+  };
+  const openEventDetail = (id) => {
+    setSelectedEventId(id);
+    setView("eventDetail");
+  };
+  const openPlazaDetail = (id) => {
+    setSelectedPlazaId(id);
+    setView("plazaDetail");
   };
 
   return (
@@ -544,10 +620,10 @@ export default function ClientDemoV3Page() {
             <button style={styles.navLink} onClick={goServices}>
               Servicios
             </button>
-            <button style={styles.navLink} onClick={goHome}>
+            <button style={styles.navLink} onClick={goEvents}>
               Eventos
             </button>
-            <button style={styles.navLink} onClick={goHome}>
+            <button style={styles.navLink} onClick={goPlazas}>
               Plazoletas
             </button>
             <button style={styles.navPanel} onClick={goHome}>
@@ -580,8 +656,8 @@ export default function ClientDemoV3Page() {
                       <button style={styles.btnPrimary} onClick={goServices}>
                         Ver experiencia turística
                       </button>
-                      <button style={styles.btnSecondary} onClick={goHome}>
-                        Ver panel administrado
+                      <button style={styles.btnSecondary} onClick={goEvents}>
+                        Ver eventos
                       </button>
                     </div>
                   </div>
@@ -655,7 +731,7 @@ export default function ClientDemoV3Page() {
                       <p style={styles.cardText}>{s.text}</p>
                       <button
                         style={styles.btnDetail}
-                        onClick={() => openDetail(s.id)}
+                        onClick={() => openServiceDetail(s.id)}
                       >
                         Ver detalle
                       </button>
@@ -673,11 +749,15 @@ export default function ClientDemoV3Page() {
                 </p>
                 <div style={styles.grid}>
                   {eventos.map((e) => (
-                    <div key={e.title} style={styles.card}>
+                    <div key={e.id} style={styles.card}>
                       <h3 style={styles.cardTitle}>{e.title}</h3>
-                      <p style={{ ...styles.cardText, marginBottom: 0 }}>
-                        {e.text}
-                      </p>
+                      <p style={styles.cardText}>{e.text}</p>
+                      <button
+                        style={styles.btnDetailGreen}
+                        onClick={() => openEventDetail(e.id)}
+                      >
+                        Ver evento
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -686,6 +766,30 @@ export default function ClientDemoV3Page() {
 
             <section style={styles.sectionLight}>
               <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>Plazoletas</h2>
+                <p style={styles.sectionSubtitle}>
+                  Siete plazoletas inspiradas en los pueblos más bellos de
+                  Boyacá.
+                </p>
+                <div style={styles.grid}>
+                  {plazas.map((p) => (
+                    <div key={p.id} style={styles.cardOnWhite}>
+                      <h3 style={styles.cardTitle}>{p.title}</h3>
+                      <p style={styles.cardText}>{p.text}</p>
+                      <button
+                        style={styles.btnDetail}
+                        onClick={() => openPlazaDetail(p.id)}
+                      >
+                        Ver plazoleta
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section style={styles.sectionGray}>
+              <div style={styles.container}>
                 <h2 style={styles.sectionTitle}>Panel administrado</h2>
                 <p style={styles.sectionSubtitle}>
                   Una plataforma gestionada profesionalmente para mantener todo
@@ -693,7 +797,7 @@ export default function ClientDemoV3Page() {
                 </p>
                 <div style={styles.grid}>
                   {panel.map((p) => (
-                    <div key={p.title} style={styles.cardOnWhite}>
+                    <div key={p.title} style={styles.card}>
                       <h3 style={styles.cardTitle}>{p.title}</h3>
                       <p style={{ ...styles.cardText, marginBottom: 0 }}>
                         {p.text}
@@ -738,7 +842,7 @@ export default function ClientDemoV3Page() {
                     <p style={styles.cardText}>{s.text}</p>
                     <button
                       style={styles.btnDetail}
-                      onClick={() => openDetail(s.id)}
+                      onClick={() => openServiceDetail(s.id)}
                     >
                       Ver detalle
                     </button>
@@ -749,8 +853,8 @@ export default function ClientDemoV3Page() {
           </section>
         )}
 
-        {/* ===================== VISTA DETAIL ===================== */}
-        {view === "detail" && selectedService && (
+        {/* ===================== VISTA SERVICE DETAIL ===================== */}
+        {view === "serviceDetail" && selectedService && (
           <section style={styles.sectionBase}>
             <div style={styles.container}>
               <button style={styles.btnBack} onClick={goServices}>
@@ -775,6 +879,110 @@ export default function ClientDemoV3Page() {
                   <button style={styles.detailWhatsapp}>
                     Contactar por WhatsApp
                   </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ===================== VISTA EVENTS ===================== */}
+        {view === "events" && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goHome}>
+                ← Volver
+              </button>
+              <h2 style={styles.sectionTitle}>Eventos culturales</h2>
+              <p style={styles.sectionSubtitle}>
+                Descubre la agenda cultural del Pueblito Boyacense.
+              </p>
+              <div style={styles.grid}>
+                {eventos.map((e) => (
+                  <div key={e.id} style={styles.card}>
+                    <h3 style={styles.cardTitle}>{e.title}</h3>
+                    <p style={styles.cardText}>{e.text}</p>
+                    <button
+                      style={styles.btnDetailGreen}
+                      onClick={() => openEventDetail(e.id)}
+                    >
+                      Ver evento
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ===================== VISTA EVENT DETAIL ===================== */}
+        {view === "eventDetail" && selectedEvent && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goEvents}>
+                ← Volver
+              </button>
+              <div style={styles.detailWrap}>
+                <div style={styles.detailCard}>
+                  <h2 style={styles.detailTitle}>{selectedEvent.title}</h2>
+                  <p style={styles.detailDesc}>{selectedEvent.text}</p>
+                  <div style={styles.detailRow}>
+                    <span style={styles.detailLabel}>Fecha</span>
+                    <span style={styles.detailValue}>
+                      {selectedEvent.fecha}
+                    </span>
+                  </div>
+                  <div style={styles.detailRow}>
+                    <span style={styles.detailLabel}>Lugar</span>
+                    <span style={styles.detailValue}>
+                      {selectedEvent.lugar}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ===================== VISTA PLAZAS ===================== */}
+        {view === "plazas" && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goHome}>
+                ← Volver
+              </button>
+              <h2 style={styles.sectionTitle}>Plazoletas</h2>
+              <p style={styles.sectionSubtitle}>
+                Siete plazoletas que recrean los pueblos más bellos de Boyacá.
+              </p>
+              <div style={styles.grid}>
+                {plazas.map((p) => (
+                  <div key={p.id} style={styles.card}>
+                    <h3 style={styles.cardTitle}>{p.title}</h3>
+                    <p style={styles.cardText}>{p.text}</p>
+                    <button
+                      style={styles.btnDetail}
+                      onClick={() => openPlazaDetail(p.id)}
+                    >
+                      Ver plazoleta
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* ===================== VISTA PLAZA DETAIL ===================== */}
+        {view === "plazaDetail" && selectedPlaza && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goPlazas}>
+                ← Volver
+              </button>
+              <div style={styles.detailWrap}>
+                <div style={styles.detailCard}>
+                  <h2 style={styles.detailTitle}>{selectedPlaza.title}</h2>
+                  <p style={styles.detailDesc}>{selectedPlaza.text}</p>
                 </div>
               </div>
             </div>
