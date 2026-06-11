@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const colors = {
   bg: "#F7F1E5",
@@ -59,6 +59,7 @@ const styles = {
     fontWeight: 800,
     color: colors.white,
     letterSpacing: "0.3px",
+    cursor: "pointer",
   },
   brandDot: {
     width: "16px",
@@ -79,6 +80,9 @@ const styles = {
     color: "rgba(255,255,255,0.85)",
     textDecoration: "none",
     cursor: "pointer",
+    background: "none",
+    border: "none",
+    padding: 0,
   },
   navPanel: {
     fontSize: "16px",
@@ -88,6 +92,7 @@ const styles = {
     borderRadius: "12px",
     padding: "12px 22px",
     cursor: "pointer",
+    border: "none",
   },
 
   /* HERO FULL WIDTH */
@@ -307,7 +312,7 @@ const styles = {
   cardText: {
     fontSize: "17px",
     lineHeight: 1.6,
-    margin: 0,
+    margin: "0 0 20px",
     color: colors.texto,
   },
   pill: {
@@ -327,14 +332,88 @@ const styles = {
     gap: "6px",
   },
 
+  /* INTERACTIVE BUTTONS */
+  btnDetail: {
+    backgroundColor: colors.terracota,
+    color: colors.white,
+    border: "none",
+    borderRadius: "12px",
+    padding: "14px 28px",
+    fontSize: "17px",
+    fontWeight: 700,
+    cursor: "pointer",
+    boxShadow: "0 10px 24px rgba(166, 75, 42, 0.3)",
+  },
+  btnBack: {
+    backgroundColor: "transparent",
+    color: colors.terracotaDark,
+    border: "2px solid " + colors.terracotaDark,
+    borderRadius: "12px",
+    padding: "14px 30px",
+    fontSize: "17px",
+    fontWeight: 700,
+    cursor: "pointer",
+    marginBottom: "40px",
+  },
+  detailWrap: {
+    maxWidth: "760px",
+    margin: "0 auto",
+  },
+  detailCard: {
+    backgroundColor: colors.white,
+    borderRadius: "24px",
+    padding: "48px",
+    boxShadow: "0 28px 64px rgba(43, 33, 24, 0.16)",
+    boxSizing: "border-box",
+  },
+  detailTitle: {
+    fontSize: "38px",
+    fontWeight: 900,
+    color: colors.terracotaDark,
+    margin: "0 0 18px",
+  },
+  detailDesc: {
+    fontSize: "19px",
+    lineHeight: 1.6,
+    color: colors.texto,
+    margin: "0 0 28px",
+  },
+  detailRow: {
+    display: "flex",
+    gap: "12px",
+    alignItems: "baseline",
+    marginBottom: "16px",
+    fontSize: "18px",
+  },
+  detailLabel: {
+    fontWeight: 800,
+    color: colors.verde,
+    minWidth: "120px",
+  },
+  detailValue: {
+    color: colors.texto,
+  },
+  detailWhatsapp: {
+    backgroundColor: "#25D366",
+    color: colors.white,
+    border: "none",
+    borderRadius: "16px",
+    padding: "20px",
+    fontSize: "19px",
+    fontWeight: 800,
+    cursor: "pointer",
+    width: "100%",
+    marginTop: "20px",
+    boxShadow: "0 14px 30px rgba(37, 211, 102, 0.4)",
+  },
+
   /* CTA */
   ctaSection: {
     backgroundColor: colors.bg,
     padding: "90px 0",
   },
   cta: {
-    background:
-      "linear-gradient(135deg, #A64B2A 0%, #6E2E18 100%)",
+    background: "linear-gradient(135deg, #A64B2A 0%, #6E2E18 100%)",
     color: colors.white,
     borderRadius: "32px",
     padding: "80px 48px",
@@ -378,20 +457,25 @@ const experiencia = [
 
 const servicios = [
   {
+    id: "restaurante-boyacense",
     title: "Restaurante Boyacense",
     text: "Cocina tradicional de la región con sabores auténticos del altiplano.",
+    horario: "Lunes a Domingo · 8:00 a.m. - 9:00 p.m.",
+    ubicacion: "Plazoleta Villa de Leyva, Pueblito Boyacense",
   },
   {
+    id: "hospedaje-colonial",
     title: "Hospedaje Colonial",
     text: "Habitaciones acogedoras con arquitectura colonial y atención cálida.",
+    horario: "Recepción 24 horas",
+    ubicacion: "Plazoleta Tibasosa, Pueblito Boyacense",
   },
   {
-    title: "Artesanías del Pueblito",
-    text: "Piezas hechas a mano que reflejan la cultura y tradición boyacense.",
-  },
-  {
+    id: "cafe-colonial",
     title: "Café Colonial",
     text: "El mejor café de origen acompañado de repostería artesanal.",
+    horario: "Lunes a Domingo · 7:00 a.m. - 8:00 p.m.",
+    ubicacion: "Plazoleta Monguí, Pueblito Boyacense",
   },
 ];
 
@@ -430,175 +514,272 @@ const panel = [
 ];
 
 export default function ClientDemoV3Page() {
+  const [view, setView] = useState("home");
+  const [selectedId, setSelectedId] = useState(null);
+
+  const selectedService =
+    servicios.find((s) => s.id === selectedId) || null;
+
+  const goHome = () => {
+    setView("home");
+    setSelectedId(null);
+  };
+
+  const goServices = () => setView("services");
+
+  const openDetail = (id) => {
+    setSelectedId(id);
+    setView("detail");
+  };
+
   return (
     <div style={styles.page}>
       <header style={styles.header}>
         <div style={styles.headerInner}>
-          <div style={styles.brand}>
+          <div style={styles.brand} onClick={goHome}>
             <span style={styles.brandDot} />
             Pueblito Boyacense
           </div>
           <nav style={styles.nav}>
-            <span style={styles.navLink}>Servicios</span>
-            <span style={styles.navLink}>Eventos</span>
-            <span style={styles.navLink}>Plazoletas</span>
-            <span style={styles.navPanel}>Panel</span>
+            <button style={styles.navLink} onClick={goServices}>
+              Servicios
+            </button>
+            <button style={styles.navLink} onClick={goHome}>
+              Eventos
+            </button>
+            <button style={styles.navLink} onClick={goHome}>
+              Plazoletas
+            </button>
+            <button style={styles.navPanel} onClick={goHome}>
+              Panel
+            </button>
           </nav>
         </div>
       </header>
 
       <main>
-        {/* HERO FULL WIDTH */}
-        <section style={styles.hero}>
-          <div style={styles.container}>
-            <div style={styles.heroGrid}>
-              <div>
-                <span style={styles.heroBadge}>
-                  Turismo · Cultura · Gastronomía
-                </span>
-                <h1 style={styles.heroTitle}>
-                  Una app turística para vivir Pueblito Boyacense
-                </h1>
-                <p style={styles.heroText}>
-                  Servicios, eventos, cultura, gastronomía y experiencias
-                  locales en una plataforma móvil administrada
-                  profesionalmente.
-                </p>
-                <div style={styles.heroButtons}>
-                  <button style={styles.btnPrimary}>
-                    Ver experiencia turística
-                  </button>
-                  <button style={styles.btnSecondary}>
-                    Ver panel administrado
-                  </button>
-                </div>
-              </div>
-
-              <div style={styles.phoneWrap}>
-                <div style={styles.phone}>
-                  <div style={styles.phoneScreen}>
-                    <div style={styles.phoneNotch} />
-                    <div style={styles.phoneHeader}>Pueblito Boyacense</div>
-                    <p style={styles.phoneLabel}>Servicios destacados</p>
-                    <div style={styles.phoneItem}>Restaurante Boyacense</div>
-                    <div style={styles.phoneItem}>Hospedaje Colonial</div>
-                    <div style={styles.phoneItem}>Café Colonial</div>
-                    <p style={styles.phoneLabel}>Evento próximo</p>
-                    <div style={styles.phoneEvent}>
-                      Bazarte — Este fin de semana
+        {/* ===================== VISTA HOME ===================== */}
+        {view === "home" && (
+          <>
+            <section style={styles.hero}>
+              <div style={styles.container}>
+                <div style={styles.heroGrid}>
+                  <div>
+                    <span style={styles.heroBadge}>
+                      Turismo · Cultura · Gastronomía
+                    </span>
+                    <h1 style={styles.heroTitle}>
+                      Una app turística para vivir Pueblito Boyacense
+                    </h1>
+                    <p style={styles.heroText}>
+                      Servicios, eventos, cultura, gastronomía y experiencias
+                      locales en una plataforma móvil administrada
+                      profesionalmente.
+                    </p>
+                    <div style={styles.heroButtons}>
+                      <button style={styles.btnPrimary} onClick={goServices}>
+                        Ver experiencia turística
+                      </button>
+                      <button style={styles.btnSecondary} onClick={goHome}>
+                        Ver panel administrado
+                      </button>
                     </div>
-                    <div style={styles.phoneWhatsapp}>WhatsApp</div>
+                  </div>
+
+                  <div style={styles.phoneWrap}>
+                    <div style={styles.phone}>
+                      <div style={styles.phoneScreen}>
+                        <div style={styles.phoneNotch} />
+                        <div style={styles.phoneHeader}>Pueblito Boyacense</div>
+                        <p style={styles.phoneLabel}>Servicios destacados</p>
+                        <div style={styles.phoneItem}>Restaurante Boyacense</div>
+                        <div style={styles.phoneItem}>Hospedaje Colonial</div>
+                        <div style={styles.phoneItem}>Café Colonial</div>
+                        <p style={styles.phoneLabel}>Evento próximo</p>
+                        <div style={styles.phoneEvent}>
+                          Bazarte — Este fin de semana
+                        </div>
+                        <div style={styles.phoneWhatsapp}>WhatsApp</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
 
-        {/* MÉTRICAS — fondo blanco */}
-        <section style={styles.sectionLight}>
-          <div style={styles.container}>
-            <h2 style={styles.sectionTitle}>En cifras</h2>
-            <p style={styles.sectionSubtitle}>
-              Una plataforma con presencia real en todo el Pueblito.
-            </p>
-            <div style={styles.metricsGrid}>
-              {metricas.map((m) => (
-                <div key={m.label} style={styles.cardOnWhite}>
-                  <p style={styles.metricNumber}>{m.number}</p>
-                  <p style={styles.metricLabel}>{m.label}</p>
+            <section style={styles.sectionLight}>
+              <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>En cifras</h2>
+                <p style={styles.sectionSubtitle}>
+                  Una plataforma con presencia real en todo el Pueblito.
+                </p>
+                <div style={styles.metricsGrid}>
+                  {metricas.map((m) => (
+                    <div key={m.label} style={styles.cardOnWhite}>
+                      <p style={styles.metricNumber}>{m.number}</p>
+                      <p style={styles.metricLabel}>{m.label}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
+              </div>
+            </section>
 
-        {/* EXPERIENCIA — fondo gris */}
-        <section style={styles.sectionGray}>
-          <div style={styles.container}>
-            <h2 style={styles.sectionTitle}>Experiencia del visitante</h2>
-            <p style={styles.sectionSubtitle}>
-              Todo lo que el turista necesita, en un solo lugar.
-            </p>
-            <div style={styles.card}>
-              <div style={styles.pillWrap}>
-                {experiencia.map((e) => (
-                  <span key={e} style={styles.pill}>
-                    {e}
-                  </span>
+            <section style={styles.sectionGray}>
+              <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>Experiencia del visitante</h2>
+                <p style={styles.sectionSubtitle}>
+                  Todo lo que el turista necesita, en un solo lugar.
+                </p>
+                <div style={styles.card}>
+                  <div style={styles.pillWrap}>
+                    {experiencia.map((e) => (
+                      <span key={e} style={styles.pill}>
+                        {e}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section style={styles.sectionLight}>
+              <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>Servicios destacados</h2>
+                <p style={styles.sectionSubtitle}>
+                  Lo mejor del Pueblito, listo para descubrir.
+                </p>
+                <div style={styles.grid}>
+                  {servicios.map((s) => (
+                    <div key={s.id} style={styles.cardOnWhite}>
+                      <h3 style={styles.cardTitle}>{s.title}</h3>
+                      <p style={styles.cardText}>{s.text}</p>
+                      <button
+                        style={styles.btnDetail}
+                        onClick={() => openDetail(s.id)}
+                      >
+                        Ver detalle
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section style={styles.sectionGray}>
+              <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>Eventos</h2>
+                <p style={styles.sectionSubtitle}>
+                  Una agenda cultural viva durante todo el año.
+                </p>
+                <div style={styles.grid}>
+                  {eventos.map((e) => (
+                    <div key={e.title} style={styles.card}>
+                      <h3 style={styles.cardTitle}>{e.title}</h3>
+                      <p style={{ ...styles.cardText, marginBottom: 0 }}>
+                        {e.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section style={styles.sectionLight}>
+              <div style={styles.container}>
+                <h2 style={styles.sectionTitle}>Panel administrado</h2>
+                <p style={styles.sectionSubtitle}>
+                  Una plataforma gestionada profesionalmente para mantener todo
+                  al día.
+                </p>
+                <div style={styles.grid}>
+                  {panel.map((p) => (
+                    <div key={p.title} style={styles.cardOnWhite}>
+                      <h3 style={styles.cardTitle}>{p.title}</h3>
+                      <p style={{ ...styles.cardText, marginBottom: 0 }}>
+                        {p.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section style={styles.ctaSection}>
+              <div style={styles.container}>
+                <div style={styles.cta}>
+                  <p style={styles.ctaText}>
+                    Una solución digital administrada para fortalecer el turismo
+                    del Pueblito Boyacense.
+                  </p>
+                  <button style={styles.btnPrimary} onClick={goServices}>
+                    Solicitar demo
+                  </button>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* ===================== VISTA SERVICES ===================== */}
+        {view === "services" && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goHome}>
+                ← Volver
+              </button>
+              <h2 style={styles.sectionTitle}>Servicios turísticos</h2>
+              <p style={styles.sectionSubtitle}>
+                Explora los servicios disponibles y abre su detalle.
+              </p>
+              <div style={styles.grid}>
+                {servicios.map((s) => (
+                  <div key={s.id} style={styles.card}>
+                    <h3 style={styles.cardTitle}>{s.title}</h3>
+                    <p style={styles.cardText}>{s.text}</p>
+                    <button
+                      style={styles.btnDetail}
+                      onClick={() => openDetail(s.id)}
+                    >
+                      Ver detalle
+                    </button>
+                  </div>
                 ))}
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        {/* SERVICIOS — fondo blanco */}
-        <section style={styles.sectionLight}>
-          <div style={styles.container}>
-            <h2 style={styles.sectionTitle}>Servicios destacados</h2>
-            <p style={styles.sectionSubtitle}>
-              Lo mejor del Pueblito, listo para descubrir.
-            </p>
-            <div style={styles.grid}>
-              {servicios.map((s) => (
-                <div key={s.title} style={styles.cardOnWhite}>
-                  <h3 style={styles.cardTitle}>{s.title}</h3>
-                  <p style={styles.cardText}>{s.text}</p>
+        {/* ===================== VISTA DETAIL ===================== */}
+        {view === "detail" && selectedService && (
+          <section style={styles.sectionBase}>
+            <div style={styles.container}>
+              <button style={styles.btnBack} onClick={goServices}>
+                ← Volver
+              </button>
+              <div style={styles.detailWrap}>
+                <div style={styles.detailCard}>
+                  <h2 style={styles.detailTitle}>{selectedService.title}</h2>
+                  <p style={styles.detailDesc}>{selectedService.text}</p>
+                  <div style={styles.detailRow}>
+                    <span style={styles.detailLabel}>Horario</span>
+                    <span style={styles.detailValue}>
+                      {selectedService.horario}
+                    </span>
+                  </div>
+                  <div style={styles.detailRow}>
+                    <span style={styles.detailLabel}>Ubicación</span>
+                    <span style={styles.detailValue}>
+                      {selectedService.ubicacion}
+                    </span>
+                  </div>
+                  <button style={styles.detailWhatsapp}>
+                    Contactar por WhatsApp
+                  </button>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* EVENTOS — fondo gris */}
-        <section style={styles.sectionGray}>
-          <div style={styles.container}>
-            <h2 style={styles.sectionTitle}>Eventos</h2>
-            <p style={styles.sectionSubtitle}>
-              Una agenda cultural viva durante todo el año.
-            </p>
-            <div style={styles.grid}>
-              {eventos.map((e) => (
-                <div key={e.title} style={styles.card}>
-                  <h3 style={styles.cardTitle}>{e.title}</h3>
-                  <p style={styles.cardText}>{e.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* PANEL — fondo blanco */}
-        <section style={styles.sectionLight}>
-          <div style={styles.container}>
-            <h2 style={styles.sectionTitle}>Panel administrado</h2>
-            <p style={styles.sectionSubtitle}>
-              Una plataforma gestionada profesionalmente para mantener todo al
-              día.
-            </p>
-            <div style={styles.grid}>
-              {panel.map((p) => (
-                <div key={p.title} style={styles.cardOnWhite}>
-                  <h3 style={styles.cardTitle}>{p.title}</h3>
-                  <p style={styles.cardText}>{p.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA FINAL */}
-        <section style={styles.ctaSection}>
-          <div style={styles.container}>
-            <div style={styles.cta}>
-              <p style={styles.ctaText}>
-                Una solución digital administrada para fortalecer el turismo del
-                Pueblito Boyacense.
-              </p>
-              <button style={styles.btnPrimary}>Solicitar demo</button>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         <footer style={styles.footer}>
           Pueblito Boyacense — Demo visual premium v3
