@@ -9,13 +9,13 @@ const colors = {
   verde: "#1B5E20",
   texto: "#2B2118",
   white: "#FFFFFF",
-  muted: "rgba(43, 33, 24, 0.7)",
+  muted: "rgba(43, 33, 24, 0.65)",
+  line: "rgba(43, 33, 24, 0.08)",
 };
 
 const styles = {
-  /* Outer canvas (centra el "celular") */
   canvas: {
-    backgroundColor: "#2B2118",
+    backgroundColor: "#241B14",
     minHeight: "100vh",
     width: "100%",
     display: "flex",
@@ -33,82 +33,117 @@ const styles = {
     backgroundColor: colors.bg,
     color: colors.texto,
     position: "relative",
-    boxShadow: "0 0 60px rgba(0,0,0,0.4)",
+    boxShadow: "0 0 80px rgba(0,0,0,0.5)",
     boxSizing: "border-box",
     display: "flex",
     flexDirection: "column",
   },
 
-  /* Header compacto */
+  /* Header elegante con degradado */
   header: {
-    backgroundColor: colors.terracota,
+    background: "linear-gradient(135deg, #A64B2A 0%, #6E2E18 100%)",
     color: colors.white,
-    padding: "18px 20px",
+    padding: "22px 22px 24px",
     position: "sticky",
     top: 0,
     zIndex: 10,
+    borderBottomLeftRadius: "24px",
+    borderBottomRightRadius: "24px",
+    boxShadow: "0 10px 28px rgba(166, 75, 42, 0.35)",
+  },
+  headerTop: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
   },
-  headerDot: {
-    width: "12px",
-    height: "12px",
-    borderRadius: "50%",
-    backgroundColor: colors.verde,
-    display: "inline-block",
+  headerLogo: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "12px",
+    backgroundColor: "rgba(255,255,255,0.18)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "20px",
+    fontWeight: 900,
   },
   headerTitle: {
-    fontSize: "18px",
+    fontSize: "20px",
     fontWeight: 800,
     margin: 0,
     letterSpacing: "0.3px",
   },
+  headerSub: {
+    fontSize: "13px",
+    margin: "2px 0 0",
+    color: "rgba(255,255,255,0.85)",
+    fontWeight: 500,
+  },
 
-  /* Content scroll area */
   content: {
     flex: 1,
-    padding: "20px 18px 110px",
+    padding: "22px 18px 120px",
     boxSizing: "border-box",
   },
 
   /* Home */
-  homeTitle: {
-    fontSize: "28px",
+  welcome: {
+    fontSize: "26px",
     fontWeight: 900,
     color: colors.terracotaDark,
-    margin: "8px 0 10px",
+    margin: "4px 0 6px",
   },
-  homeText: {
-    fontSize: "16px",
+  welcomeText: {
+    fontSize: "15px",
     lineHeight: 1.5,
     color: colors.muted,
-    margin: "0 0 24px",
+    margin: "0 0 22px",
+  },
+
+  sectionLabel: {
+    fontSize: "13px",
+    fontWeight: 800,
+    color: colors.verde,
+    textTransform: "uppercase",
+    letterSpacing: "0.6px",
+    margin: "26px 0 12px",
+  },
+
+  quickRow: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "10px",
+    marginBottom: "6px",
   },
   quickCard: {
     backgroundColor: colors.white,
-    borderRadius: "20px",
-    padding: "24px 22px",
-    boxShadow: "0 14px 32px rgba(43, 33, 24, 0.12)",
-    marginBottom: "16px",
+    borderRadius: "18px",
+    padding: "16px 10px",
+    boxShadow: "0 10px 24px rgba(43, 33, 24, 0.1)",
     cursor: "pointer",
+    textAlign: "center",
     display: "flex",
     flexDirection: "column",
-    gap: "6px",
+    alignItems: "center",
+    gap: "8px",
   },
-  quickTitle: {
+  quickIcon: {
+    width: "42px",
+    height: "42px",
+    borderRadius: "12px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     fontSize: "20px",
-    fontWeight: 800,
-    color: colors.verde,
-    margin: 0,
   },
-  quickText: {
-    fontSize: "15px",
-    color: colors.muted,
+  quickLabel: {
+    fontSize: "13px",
+    fontWeight: 700,
+    color: colors.texto,
     margin: 0,
   },
 
-  /* Section title */
+  /* Page title */
   pageTitle: {
     fontSize: "24px",
     fontWeight: 900,
@@ -116,35 +151,71 @@ const styles = {
     margin: "4px 0 18px",
   },
 
-  /* List cards */
+  /* Cards */
   card: {
     backgroundColor: colors.white,
     borderRadius: "20px",
-    padding: "22px",
-    boxShadow: "0 14px 32px rgba(43, 33, 24, 0.12)",
+    padding: "20px",
+    boxShadow: "0 14px 32px rgba(43, 33, 24, 0.1)",
     marginBottom: "16px",
     boxSizing: "border-box",
   },
+  cardHead: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: "10px",
+    marginBottom: "8px",
+  },
   cardTitle: {
-    fontSize: "20px",
+    fontSize: "19px",
     fontWeight: 800,
     color: colors.verde,
-    margin: "0 0 8px",
+    margin: 0,
   },
   cardText: {
     fontSize: "15px",
     lineHeight: 1.5,
     color: colors.texto,
-    margin: "0 0 18px",
+    margin: "0 0 16px",
   },
 
-  /* Touch buttons */
+  /* Badges */
+  badgeDestacado: {
+    backgroundColor: "rgba(166, 75, 42, 0.12)",
+    color: colors.terracota,
+    borderRadius: "999px",
+    padding: "5px 12px",
+    fontSize: "12px",
+    fontWeight: 800,
+    whiteSpace: "nowrap",
+  },
+  badgeCultural: {
+    backgroundColor: "rgba(27, 94, 32, 0.12)",
+    color: colors.verde,
+    borderRadius: "999px",
+    padding: "5px 12px",
+    fontSize: "12px",
+    fontWeight: 800,
+    whiteSpace: "nowrap",
+  },
+  badgeDisponible: {
+    backgroundColor: "rgba(37, 211, 102, 0.15)",
+    color: "#128C3E",
+    borderRadius: "999px",
+    padding: "5px 12px",
+    fontSize: "12px",
+    fontWeight: 800,
+    whiteSpace: "nowrap",
+  },
+
+  /* Buttons */
   btnFull: {
     backgroundColor: colors.terracota,
     color: colors.white,
     border: "none",
     borderRadius: "14px",
-    padding: "16px",
+    padding: "15px",
     fontSize: "16px",
     fontWeight: 700,
     cursor: "pointer",
@@ -156,7 +227,7 @@ const styles = {
     color: colors.white,
     border: "none",
     borderRadius: "14px",
-    padding: "16px",
+    padding: "15px",
     fontSize: "16px",
     fontWeight: 700,
     cursor: "pointer",
@@ -175,29 +246,87 @@ const styles = {
     marginBottom: "18px",
   },
 
+  /* Highlight (próximo evento) */
+  eventBanner: {
+    background: "linear-gradient(135deg, #1B5E20 0%, #0F3D14 100%)",
+    color: colors.white,
+    borderRadius: "20px",
+    padding: "22px",
+    boxShadow: "0 16px 34px rgba(27, 94, 32, 0.32)",
+    marginBottom: "8px",
+  },
+  eventBannerLabel: {
+    fontSize: "12px",
+    fontWeight: 800,
+    textTransform: "uppercase",
+    letterSpacing: "0.6px",
+    opacity: 0.85,
+    margin: "0 0 8px",
+  },
+  eventBannerTitle: {
+    fontSize: "22px",
+    fontWeight: 900,
+    margin: "0 0 6px",
+  },
+  eventBannerText: {
+    fontSize: "14px",
+    lineHeight: 1.5,
+    margin: 0,
+    opacity: 0.92,
+  },
+
+  /* Info útil */
+  infoItem: {
+    backgroundColor: colors.white,
+    borderRadius: "16px",
+    padding: "16px 18px",
+    boxShadow: "0 8px 20px rgba(43, 33, 24, 0.08)",
+    marginBottom: "12px",
+    display: "flex",
+    gap: "12px",
+    alignItems: "center",
+  },
+  infoIcon: {
+    fontSize: "22px",
+  },
+  infoTextWrap: { flex: 1 },
+  infoTitle: {
+    fontSize: "15px",
+    fontWeight: 800,
+    color: colors.texto,
+    margin: "0 0 2px",
+  },
+  infoText: {
+    fontSize: "13px",
+    color: colors.muted,
+    margin: 0,
+  },
+
   /* Detail */
   detailTitle: {
     fontSize: "26px",
     fontWeight: 900,
     color: colors.terracotaDark,
-    margin: "0 0 14px",
+    margin: "0 0 6px",
   },
   detailDesc: {
     fontSize: "16px",
     lineHeight: 1.6,
     color: colors.texto,
-    margin: "0 0 22px",
+    margin: "14px 0 22px",
   },
   detailRow: {
     marginBottom: "14px",
+    borderBottom: "1px solid " + colors.line,
+    paddingBottom: "14px",
   },
   detailLabel: {
     display: "block",
-    fontSize: "13px",
+    fontSize: "12px",
     fontWeight: 800,
     color: colors.verde,
     textTransform: "uppercase",
-    letterSpacing: "0.5px",
+    letterSpacing: "0.6px",
     marginBottom: "4px",
   },
   detailValue: {
@@ -215,11 +344,33 @@ const styles = {
     fontWeight: 800,
     cursor: "pointer",
     width: "100%",
-    marginTop: "12px",
+    marginTop: "16px",
     boxShadow: "0 10px 24px rgba(37, 211, 102, 0.4)",
   },
 
-  /* Bottom nav fija */
+  /* FAB WhatsApp */
+  fab: {
+    position: "fixed",
+    bottom: "92px",
+    left: "50%",
+    transform: "translateX(135px)",
+    width: "60px",
+    height: "60px",
+    borderRadius: "50%",
+    backgroundColor: "#25D366",
+    color: colors.white,
+    border: "none",
+    fontSize: "26px",
+    fontWeight: 900,
+    cursor: "pointer",
+    boxShadow: "0 12px 28px rgba(37, 211, 102, 0.5)",
+    zIndex: 25,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  /* Bottom nav */
   bottomNav: {
     position: "fixed",
     bottom: 0,
@@ -228,11 +379,11 @@ const styles = {
     width: "100%",
     maxWidth: "430px",
     backgroundColor: colors.white,
-    borderTop: "1px solid rgba(43, 33, 24, 0.1)",
+    borderTop: "1px solid " + colors.line,
     display: "flex",
     justifyContent: "space-around",
-    padding: "10px 6px",
-    boxShadow: "0 -8px 24px rgba(43, 33, 24, 0.12)",
+    padding: "10px 6px 14px",
+    boxShadow: "0 -10px 28px rgba(43, 33, 24, 0.12)",
     zIndex: 20,
     boxSizing: "border-box",
   },
@@ -243,19 +394,23 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "4px",
-    padding: "6px 8px",
+    gap: "5px",
+    padding: "6px 4px",
     flex: 1,
   },
-  navDot: {
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
-    display: "inline-block",
+  navIcon: {
+    fontSize: "20px",
+    lineHeight: 1,
   },
   navLabel: {
-    fontSize: "12px",
+    fontSize: "11px",
     fontWeight: 700,
+  },
+  navIndicator: {
+    width: "20px",
+    height: "3px",
+    borderRadius: "999px",
+    marginTop: "2px",
   },
 };
 
@@ -263,6 +418,8 @@ const servicios = [
   {
     id: "restaurante-boyacense",
     title: "Restaurante Boyacense",
+    icon: "🍽️",
+    badge: "Destacado",
     text: "Cocina tradicional de la región con sabores auténticos del altiplano.",
     horario: "Lunes a Domingo · 8:00 a.m. - 9:00 p.m.",
     ubicacion: "Plazoleta Villa de Leyva, Pueblito Boyacense",
@@ -270,6 +427,8 @@ const servicios = [
   {
     id: "hospedaje-colonial",
     title: "Hospedaje Colonial",
+    icon: "🏨",
+    badge: "Disponible",
     text: "Habitaciones acogedoras con arquitectura colonial y atención cálida.",
     horario: "Recepción 24 horas",
     ubicacion: "Plazoleta Tibasosa, Pueblito Boyacense",
@@ -277,9 +436,38 @@ const servicios = [
   {
     id: "cafe-colonial",
     title: "Café Colonial",
+    icon: "☕",
+    badge: "Destacado",
     text: "El mejor café de origen acompañado de repostería artesanal.",
     horario: "Lunes a Domingo · 7:00 a.m. - 8:00 p.m.",
     ubicacion: "Plazoleta Monguí, Pueblito Boyacense",
+  },
+  {
+    id: "artesanias-del-pueblito",
+    title: "Artesanías del Pueblito",
+    icon: "🧶",
+    badge: "Cultural",
+    text: "Piezas hechas a mano que reflejan la cultura y tradición boyacense.",
+    horario: "Lunes a Domingo · 9:00 a.m. - 7:00 p.m.",
+    ubicacion: "Plazoleta Ráquira, Pueblito Boyacense",
+  },
+  {
+    id: "spa-andino",
+    title: "Spa Andino",
+    icon: "🌿",
+    badge: "Disponible",
+    text: "Experiencias de relajación inspiradas en tradiciones andinas.",
+    horario: "Lunes a Domingo · 10:00 a.m. - 8:00 p.m.",
+    ubicacion: "Plazoleta Sáchica, Pueblito Boyacense",
+  },
+  {
+    id: "capilla-san-francisco",
+    title: "Capilla San Francisco",
+    icon: "⛪",
+    badge: "Cultural",
+    text: "Espacio de fe y arquitectura colonial para visitar y contemplar.",
+    horario: "Lunes a Domingo · 7:00 a.m. - 6:00 p.m.",
+    ubicacion: "Plazoleta central, Pueblito Boyacense",
   },
 ];
 
@@ -345,12 +533,36 @@ const plazas = [
   },
 ];
 
-const navItems = [
-  { key: "home", label: "Inicio" },
-  { key: "services", label: "Servicios" },
-  { key: "events", label: "Eventos" },
-  { key: "plazas", label: "Plazoletas" },
+const infoUtil = [
+  {
+    icon: "🕐",
+    title: "Horario general",
+    text: "Abierto todos los días de 8:00 a.m. a 9:00 p.m.",
+  },
+  {
+    icon: "📍",
+    title: "Ubicación",
+    text: "Duitama, Boyacá — entrada principal señalizada.",
+  },
+  {
+    icon: "🅿️",
+    title: "Parqueadero",
+    text: "Zona de parqueo disponible para visitantes.",
+  },
 ];
+
+const navItems = [
+  { key: "home", label: "Inicio", icon: "🏠" },
+  { key: "services", label: "Servicios", icon: "🍽️" },
+  { key: "events", label: "Eventos", icon: "🎉" },
+  { key: "plazas", label: "Plazoletas", icon: "🏛️" },
+];
+
+function badgeStyle(badge) {
+  if (badge === "Destacado") return styles.badgeDestacado;
+  if (badge === "Cultural") return styles.badgeCultural;
+  return styles.badgeDisponible;
+}
 
 export default function MobileDemoPage() {
   const [view, setView] = useState("home");
@@ -371,44 +583,117 @@ export default function MobileDemoPage() {
     return false;
   };
 
+  const proximoEvento = eventos[0];
+
   return (
     <div style={styles.canvas}>
       <div style={styles.app}>
         <header style={styles.header}>
-          <span style={styles.headerDot} />
-          <h1 style={styles.headerTitle}>Pueblito Boyacense</h1>
+          <div style={styles.headerTop}>
+            <div style={styles.headerLogo}>PB</div>
+            <div>
+              <h1 style={styles.headerTitle}>Pueblito Boyacense</h1>
+              <p style={styles.headerSub}>Turismo · Cultura · Gastronomía</p>
+            </div>
+          </div>
         </header>
 
         <div style={styles.content}>
           {/* ============ HOME ============ */}
           {view === "home" && (
             <>
-              <h2 style={styles.homeTitle}>Pueblito Boyacense</h2>
-              <p style={styles.homeText}>
+              <h2 style={styles.welcome}>¡Bienvenido!</h2>
+              <p style={styles.welcomeText}>
                 Descubre servicios, eventos y cultura en un solo lugar.
               </p>
 
+              <p style={styles.sectionLabel}>Accesos rápidos</p>
+              <div style={styles.quickRow}>
+                <div
+                  style={styles.quickCard}
+                  onClick={() => setView("services")}
+                >
+                  <span
+                    style={{
+                      ...styles.quickIcon,
+                      backgroundColor: "rgba(166, 75, 42, 0.12)",
+                    }}
+                  >
+                    🍽️
+                  </span>
+                  <p style={styles.quickLabel}>Servicios</p>
+                </div>
+                <div style={styles.quickCard} onClick={() => setView("events")}>
+                  <span
+                    style={{
+                      ...styles.quickIcon,
+                      backgroundColor: "rgba(27, 94, 32, 0.12)",
+                    }}
+                  >
+                    🎉
+                  </span>
+                  <p style={styles.quickLabel}>Eventos</p>
+                </div>
+                <div style={styles.quickCard} onClick={() => setView("plazas")}>
+                  <span
+                    style={{
+                      ...styles.quickIcon,
+                      backgroundColor: "rgba(166, 75, 42, 0.12)",
+                    }}
+                  >
+                    🏛️
+                  </span>
+                  <p style={styles.quickLabel}>Plazoletas</p>
+                </div>
+              </div>
+
+              <p style={styles.sectionLabel}>Servicios destacados</p>
+              {servicios.slice(0, 3).map((s) => (
+                <div key={s.id} style={styles.card}>
+                  <div style={styles.cardHead}>
+                    <h3 style={styles.cardTitle}>
+                      {s.icon} {s.title}
+                    </h3>
+                    <span style={badgeStyle(s.badge)}>{s.badge}</span>
+                  </div>
+                  <p style={styles.cardText}>{s.text}</p>
+                  <button
+                    style={styles.btnFull}
+                    onClick={() => {
+                      setServiceId(s.id);
+                      setView("serviceDetail");
+                    }}
+                  >
+                    Ver detalle
+                  </button>
+                </div>
+              ))}
+
+              <p style={styles.sectionLabel}>Próximo evento</p>
               <div
-                style={styles.quickCard}
-                onClick={() => setView("services")}
+                style={styles.eventBanner}
+                onClick={() => {
+                  setEventId(proximoEvento.id);
+                  setView("eventDetail");
+                }}
               >
-                <p style={styles.quickTitle}>Servicios</p>
-                <p style={styles.quickText}>
-                  Restaurantes, hospedajes y cafeterías.
+                <p style={styles.eventBannerLabel}>No te lo pierdas</p>
+                <h3 style={styles.eventBannerTitle}>{proximoEvento.title}</h3>
+                <p style={styles.eventBannerText}>
+                  {proximoEvento.fecha} · {proximoEvento.text}
                 </p>
               </div>
-              <div style={styles.quickCard} onClick={() => setView("events")}>
-                <p style={styles.quickTitle}>Eventos</p>
-                <p style={styles.quickText}>
-                  Agenda cultural durante todo el año.
-                </p>
-              </div>
-              <div style={styles.quickCard} onClick={() => setView("plazas")}>
-                <p style={styles.quickTitle}>Plazoletas</p>
-                <p style={styles.quickText}>
-                  Siete plazoletas inspiradas en Boyacá.
-                </p>
-              </div>
+
+              <p style={styles.sectionLabel}>Información útil</p>
+              {infoUtil.map((i) => (
+                <div key={i.title} style={styles.infoItem}>
+                  <span style={styles.infoIcon}>{i.icon}</span>
+                  <div style={styles.infoTextWrap}>
+                    <p style={styles.infoTitle}>{i.title}</p>
+                    <p style={styles.infoText}>{i.text}</p>
+                  </div>
+                </div>
+              ))}
             </>
           )}
 
@@ -418,7 +703,12 @@ export default function MobileDemoPage() {
               <h2 style={styles.pageTitle}>Servicios</h2>
               {servicios.map((s) => (
                 <div key={s.id} style={styles.card}>
-                  <h3 style={styles.cardTitle}>{s.title}</h3>
+                  <div style={styles.cardHead}>
+                    <h3 style={styles.cardTitle}>
+                      {s.icon} {s.title}
+                    </h3>
+                    <span style={badgeStyle(s.badge)}>{s.badge}</span>
+                  </div>
                   <p style={styles.cardText}>{s.text}</p>
                   <button
                     style={styles.btnFull}
@@ -444,7 +734,14 @@ export default function MobileDemoPage() {
                 ← Volver
               </button>
               <div style={styles.card}>
-                <h2 style={styles.detailTitle}>{selectedService.title}</h2>
+                <div style={styles.cardHead}>
+                  <h2 style={styles.detailTitle}>
+                    {selectedService.icon} {selectedService.title}
+                  </h2>
+                  <span style={badgeStyle(selectedService.badge)}>
+                    {selectedService.badge}
+                  </span>
+                </div>
                 <p style={styles.detailDesc}>{selectedService.text}</p>
                 <div style={styles.detailRow}>
                   <span style={styles.detailLabel}>Horario</span>
@@ -454,7 +751,7 @@ export default function MobileDemoPage() {
                   <span style={styles.detailLabel}>Ubicación</span>
                   <p style={styles.detailValue}>{selectedService.ubicacion}</p>
                 </div>
-                <button style={styles.whatsapp}>WhatsApp</button>
+                <button style={styles.whatsapp}>Contactar por WhatsApp</button>
               </div>
             </>
           )}
@@ -465,7 +762,10 @@ export default function MobileDemoPage() {
               <h2 style={styles.pageTitle}>Eventos</h2>
               {eventos.map((e) => (
                 <div key={e.id} style={styles.card}>
-                  <h3 style={styles.cardTitle}>{e.title}</h3>
+                  <div style={styles.cardHead}>
+                    <h3 style={styles.cardTitle}>{e.title}</h3>
+                    <span style={styles.badgeCultural}>Cultural</span>
+                  </div>
                   <p style={styles.cardText}>{e.text}</p>
                   <button
                     style={styles.btnFullGreen}
@@ -488,7 +788,10 @@ export default function MobileDemoPage() {
                 ← Volver
               </button>
               <div style={styles.card}>
-                <h2 style={styles.detailTitle}>{selectedEvent.title}</h2>
+                <div style={styles.cardHead}>
+                  <h2 style={styles.detailTitle}>{selectedEvent.title}</h2>
+                  <span style={styles.badgeCultural}>Cultural</span>
+                </div>
                 <p style={styles.detailDesc}>{selectedEvent.text}</p>
                 <div style={styles.detailRow}>
                   <span style={styles.detailLabel}>Fecha</span>
@@ -508,7 +811,10 @@ export default function MobileDemoPage() {
               <h2 style={styles.pageTitle}>Plazoletas</h2>
               {plazas.map((p) => (
                 <div key={p.id} style={styles.card}>
-                  <h3 style={styles.cardTitle}>{p.title}</h3>
+                  <div style={styles.cardHead}>
+                    <h3 style={styles.cardTitle}>{p.title}</h3>
+                    <span style={styles.badgeCultural}>Cultural</span>
+                  </div>
                   <p style={styles.cardText}>{p.text}</p>
                   <button
                     style={styles.btnFull}
@@ -531,14 +837,24 @@ export default function MobileDemoPage() {
                 ← Volver
               </button>
               <div style={styles.card}>
-                <h2 style={styles.detailTitle}>{selectedPlaza.title}</h2>
+                <div style={styles.cardHead}>
+                  <h2 style={styles.detailTitle}>{selectedPlaza.title}</h2>
+                  <span style={styles.badgeCultural}>Cultural</span>
+                </div>
                 <p style={styles.detailDesc}>{selectedPlaza.text}</p>
               </div>
             </>
           )}
         </div>
 
-        {/* ============ BOTTOM NAV ============ */}
+        {/* FAB WhatsApp solo en Home */}
+        {view === "home" && (
+          <button style={styles.fab} aria-label="WhatsApp">
+            💬
+          </button>
+        )}
+
+        {/* Bottom nav */}
         <nav style={styles.bottomNav}>
           {navItems.map((item) => {
             const active = navActive(item.key);
@@ -550,10 +866,13 @@ export default function MobileDemoPage() {
               >
                 <span
                   style={{
-                    ...styles.navDot,
-                    backgroundColor: active ? colors.terracota : "rgba(43,33,24,0.25)",
+                    ...styles.navIcon,
+                    filter: active ? "none" : "grayscale(60%)",
+                    opacity: active ? 1 : 0.55,
                   }}
-                />
+                >
+                  {item.icon}
+                </span>
                 <span
                   style={{
                     ...styles.navLabel,
@@ -562,6 +881,12 @@ export default function MobileDemoPage() {
                 >
                   {item.label}
                 </span>
+                <span
+                  style={{
+                    ...styles.navIndicator,
+                    backgroundColor: active ? colors.terracota : "transparent",
+                  }}
+                />
               </button>
             );
           })}
