@@ -1,87 +1,68 @@
 "use client";
 
-const services = [
-  "Restaurante de ejemplo",
-  "Hospedaje de ejemplo",
-  "Artesanía de ejemplo",
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import Link from "next/link";
 
 export default function ServicesPage() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    async function fetchServices() {
+      if (!supabase) {
+        setError("Supabase no está configurado. Revisa apps/admin/.env.local");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from("services")
+          .select("*")
+          .order("sort_order", { ascending: true });
+
+        if (error) {
+          console.error(error);
+          setError("Error al cargar servicios.");
+        } else {
+          setServices(data || []);
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Error inesperado al cargar servicios.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchServices();
+  }, []);
+
+  if (loading) return <p>Cargando servicios...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+
   return (
-    <main className="page" style={{ alignItems: "flex-start" }}>
-      <section className="card" style={{ maxWidth: "860px" }}>
-        <span className="eyebrow">Pueblito Boyacense</span>
-        <h1>Servicios — Pueblito Boyacense</h1>
-        <p>
-          Administra restaurantes, hospedajes, cafeterías, artesanías, spa,
-          capilla y otros servicios turísticos.
-        </p>
-
-        <div style={{ marginTop: "16px", textAlign: "left" }}>
-          <button
-            type="button"
-            style={{
-              padding: "10px 16px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#1B5E20",
-              color: "#FFFFFF",
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-          >
-            Nuevo servicio
-          </button>
-        </div>
-
-        <ul
-          style={{
-            listStyle: "none",
-            margin: "24px 0 0",
-            padding: 0,
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-            textAlign: "left",
-          }}
-        >
-          {services.map((name) => (
-            <li
-              key={name}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "12px",
-                border: "1px solid #d8cdb8",
-                borderLeft: "4px solid #A64B2A",
-                borderRadius: "10px",
-                padding: "16px 20px",
-                backgroundColor: "#FFFFFF",
-              }}
-            >
-              <span style={{ fontWeight: 600, color: "#2B2118" }}>{name}</span>
-              <span
-                style={{
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                  color: "#A64B2A",
-                  backgroundColor: "#F7F1E5",
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                }}
-              >
-                Pendiente
-              </span>
+    <div>
+      <h1>Servicios</h1>
+      <Link href="#" style={{ display: "inline-block", marginBottom: "1rem", background: "#0070f3", color: "white", padding: "0.5rem 1rem", borderRadius: "4px", textDecoration: "none" }}>
+        Nuevo servicio
+      </Link>
+      {services.length === 0 ? (
+        <p>No hay servicios registrados aún.</p>
+      ) : (
+        <ul>
+          {services.map((service) => (
+            <li key={service.id} style={{ marginBottom: "1rem", padding: "0.5rem", border: "1px solid #ccc", borderRadius: "4px" }}>
+              <h3>{service.name}</h3>
+              <p>{service.description}</p>
+              <p>Estado: {service.status}</p>
+              <p>Destacado: {service.is_featured ? "Sí" : "No"}</p>
             </li>
           ))}
         </ul>
-
-        <p className="note">
-          Este módulo será conectado a Supabase en el siguiente paso.
-        </p>
-      </section>
-    </main>
+      )}
+    </div>
   );
 }
