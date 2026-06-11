@@ -1,88 +1,62 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import Link from "next/link";
+
 export default function GalleryPage() {
-  const categories = [
-    { id: 1, name: "General", status: "Pendiente" },
-    { id: 2, name: "Eventos", status: "Pendiente" },
-    { id: 3, name: "Plazoletas", status: "Pendiente" },
-    { id: 4, name: "Gastronomía", status: "Pendiente" },
-  ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    async function fetchGallery() {
+      if (!supabase) {
+        setError("Supabase no está configurado. Revisa apps/admin/.env.local");
+        setLoading(false);
+        return;
+      }
+      try {
+        const { data, error } = await supabase
+          .from("gallery_images")
+          .select("*")
+          .order("sort_order", { ascending: true });
+
+        if (error) {
+          console.error(error);
+          setError("Error al cargar galería.");
+        } else {
+          setImages(data || []);
+        }
+      } catch (err) {
+        console.error(err);
+        setError("Error inesperado al cargar galería.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchGallery();
+  }, []);
+
+  if (loading) return <p>Cargando galería...</p>;
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
 
   return (
-    <main className="page" style={{ padding: "24px", maxWidth: "900px", margin: "0 auto" }}>
-      <header style={{ marginBottom: "24px" }}>
-        <h1 style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "8px" }}>
-          Galería — Pueblito Boyacense
-        </h1>
-        <p style={{ color: "#555", lineHeight: "1.5" }}>
-          Administra imágenes, categorías visuales y material fotográfico de la app.
-        </p>
-      </header>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "16px",
-        }}
-      >
-        <button
-          type="button"
-          className="btn btn-primary"
-          style={{
-            padding: "10px 18px",
-            borderRadius: "8px",
-            border: "none",
-            backgroundColor: "#1d4ed8",
-            color: "#fff",
-            fontWeight: "600",
-            cursor: "pointer",
-          }}
-        >
-          Nueva imagen
-        </button>
-      </div>
-
-      <section className="card" style={{ border: "1px solid #e5e7eb", borderRadius: "10px", overflow: "hidden" }}>
-        <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
-          {categories.map((category) => (
-            <li
-              key={category.id}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "14px 18px",
-                borderBottom: "1px solid #f0f0f0",
-              }}
-            >
-              <span style={{ fontWeight: "500" }}>{category.name}</span>
-              <span
-                style={{
-                  fontSize: "13px",
-                  padding: "4px 10px",
-                  borderRadius: "999px",
-                  backgroundColor: "#fef3c7",
-                  color: "#92400e",
-                }}
-              >
-                {category.status}
-              </span>
+    <div>
+      <h1>Galería</h1>
+      <Link href="#" style={{ display: "inline-block", marginBottom: "1rem", background: "#0070f3", color: "white", padding: "0.5rem 1rem", borderRadius: "4px", textDecoration: "none" }}>Nueva imagen</Link>
+      {images.length === 0 ? (
+        <p>No hay imágenes registradas aún.</p>
+      ) : (
+        <ul>
+          {images.map(img => (
+            <li key={img.id} style={{ marginBottom: "1rem", padding: "0.5rem", border: "1px solid #ccc", borderRadius: "4px" }}>
+              <h3>{img.title}</h3>
+              <p>{img.description}</p>
             </li>
           ))}
         </ul>
-      </section>
-
-      <p
-        style={{
-          marginTop: "20px",
-          fontSize: "13px",
-          color: "#888",
-          fontStyle: "italic",
-        }}
-      >
-        Este módulo será conectado a Supabase Storage en el siguiente paso.
-      </p>
-    </main>
+      )}
+    </div>
   );
 }
