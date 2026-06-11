@@ -5,9 +5,11 @@ import React from "react";
 const colors = {
   bg: "#F7F1E5",
   terracota: "#A64B2A",
+  terracotaDark: "#6E2E18",
   verde: "#1B5E20",
   texto: "#2B2118",
   white: "#FFFFFF",
+  gris: "#ECE6D8",
   muted: "rgba(43, 33, 24, 0.7)",
 };
 
@@ -25,18 +27,18 @@ const styles = {
   container: {
     maxWidth: "1280px",
     margin: "0 auto",
-    padding: "0 28px",
+    padding: "0 32px",
     width: "100%",
     boxSizing: "border-box",
   },
+
+  /* HEADER */
   header: {
     width: "100%",
-    backgroundColor: "rgba(247, 241, 229, 0.92)",
-    backdropFilter: "blur(8px)",
-    borderBottom: "1px solid rgba(166, 75, 42, 0.15)",
+    backgroundColor: "rgba(43, 33, 24, 0.96)",
     position: "sticky",
     top: 0,
-    zIndex: 20,
+    zIndex: 30,
   },
   headerInner: {
     display: "flex",
@@ -44,7 +46,7 @@ const styles = {
     justifyContent: "space-between",
     flexWrap: "wrap",
     gap: "16px",
-    padding: "22px 28px",
+    padding: "22px 32px",
     maxWidth: "1280px",
     margin: "0 auto",
     boxSizing: "border-box",
@@ -55,14 +57,14 @@ const styles = {
     gap: "12px",
     fontSize: "24px",
     fontWeight: 800,
-    color: colors.terracota,
+    color: colors.white,
     letterSpacing: "0.3px",
   },
   brandDot: {
     width: "16px",
     height: "16px",
     borderRadius: "50%",
-    backgroundColor: colors.verde,
+    backgroundColor: colors.terracota,
     display: "inline-block",
   },
   nav: {
@@ -74,7 +76,7 @@ const styles = {
   navLink: {
     fontSize: "17px",
     fontWeight: 600,
-    color: colors.texto,
+    color: "rgba(255,255,255,0.85)",
     textDecoration: "none",
     cursor: "pointer",
   },
@@ -83,87 +85,118 @@ const styles = {
     fontWeight: 700,
     color: colors.white,
     backgroundColor: colors.verde,
-    borderRadius: "10px",
-    padding: "10px 20px",
+    borderRadius: "12px",
+    padding: "12px 22px",
     cursor: "pointer",
   },
-  heroWrap: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
-    gap: "48px",
+
+  /* HERO FULL WIDTH */
+  hero: {
+    width: "100%",
+    minHeight: "78vh",
+    background:
+      "linear-gradient(135deg, #2B2118 0%, #6E2E18 45%, #A64B2A 100%)",
+    display: "flex",
     alignItems: "center",
-    padding: "72px 0 56px",
+    boxSizing: "border-box",
+    padding: "60px 0",
+  },
+  heroGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
+    gap: "56px",
+    alignItems: "center",
+    width: "100%",
+  },
+  heroBadge: {
+    display: "inline-block",
+    backgroundColor: "rgba(255,255,255,0.14)",
+    color: colors.white,
+    borderRadius: "999px",
+    padding: "10px 20px",
+    fontSize: "15px",
+    fontWeight: 700,
+    marginBottom: "24px",
+    letterSpacing: "0.5px",
   },
   heroTitle: {
-    fontSize: "52px",
-    lineHeight: 1.1,
+    fontSize: "60px",
+    lineHeight: 1.05,
     fontWeight: 900,
-    margin: "0 0 22px",
-    color: colors.terracota,
+    margin: "0 0 26px",
+    color: colors.white,
   },
   heroText: {
-    fontSize: "20px",
+    fontSize: "22px",
     lineHeight: 1.6,
-    margin: "0 0 36px",
-    color: colors.texto,
-    maxWidth: "560px",
+    margin: "0 0 40px",
+    color: "rgba(255,255,255,0.9)",
+    maxWidth: "580px",
   },
   heroButtons: {
     display: "flex",
-    gap: "18px",
+    gap: "20px",
     flexWrap: "wrap",
   },
   btnPrimary: {
+    backgroundColor: colors.verde,
+    color: colors.white,
+    border: "none",
+    borderRadius: "16px",
+    padding: "22px 44px",
+    fontSize: "20px",
+    fontWeight: 800,
+    cursor: "pointer",
+    boxShadow: "0 16px 36px rgba(27, 94, 32, 0.45)",
+  },
+  btnSecondary: {
     backgroundColor: colors.terracota,
     color: colors.white,
     border: "none",
-    borderRadius: "14px",
-    padding: "18px 34px",
-    fontSize: "18px",
-    fontWeight: 700,
+    borderRadius: "16px",
+    padding: "22px 44px",
+    fontSize: "20px",
+    fontWeight: 800,
     cursor: "pointer",
-    boxShadow: "0 12px 28px rgba(166, 75, 42, 0.32)",
+    boxShadow: "0 16px 36px rgba(166, 75, 42, 0.45)",
   },
-  btnSecondary: {
-    backgroundColor: "transparent",
-    color: colors.verde,
-    border: "2px solid " + colors.verde,
-    borderRadius: "14px",
-    padding: "16px 32px",
-    fontSize: "18px",
-    fontWeight: 700,
-    cursor: "pointer",
-  },
+
+  /* MOCKUP GRANDE */
   phoneWrap: {
     display: "flex",
     justifyContent: "center",
   },
   phone: {
-    width: "320px",
+    width: "380px",
     maxWidth: "100%",
+    backgroundColor: "#0E0B08",
+    borderRadius: "52px",
+    padding: "20px",
+    boxShadow: "0 40px 90px rgba(0, 0, 0, 0.45)",
+    boxSizing: "border-box",
+  },
+  phoneScreen: {
     backgroundColor: colors.white,
-    borderRadius: "40px",
-    padding: "18px",
-    boxShadow: "0 30px 70px rgba(43, 33, 24, 0.25)",
-    border: "10px solid #2B2118",
+    borderRadius: "38px",
+    padding: "22px",
     boxSizing: "border-box",
   },
   phoneNotch: {
-    width: "120px",
-    height: "8px",
-    backgroundColor: "rgba(43, 33, 24, 0.3)",
+    width: "140px",
+    height: "10px",
+    backgroundColor: "rgba(255,255,255,0.25)",
     borderRadius: "999px",
-    margin: "4px auto 16px",
+    margin: "2px auto 18px",
   },
   phoneHeader: {
     backgroundColor: colors.terracota,
     color: colors.white,
-    borderRadius: "20px",
-    padding: "18px",
-    fontSize: "18px",
+    borderRadius: "22px",
+    padding: "22px",
+    fontSize: "20px",
     fontWeight: 800,
     textAlign: "center",
-    marginBottom: "16px",
+    marginBottom: "20px",
   },
   phoneLabel: {
     fontSize: "13px",
@@ -171,133 +204,159 @@ const styles = {
     color: colors.verde,
     textTransform: "uppercase",
     letterSpacing: "0.5px",
-    margin: "0 0 8px",
+    margin: "0 0 10px",
   },
   phoneItem: {
     backgroundColor: colors.bg,
-    borderRadius: "14px",
-    padding: "12px 14px",
-    fontSize: "15px",
+    borderRadius: "16px",
+    padding: "16px 16px",
+    fontSize: "16px",
     fontWeight: 600,
     color: colors.texto,
-    marginBottom: "10px",
+    marginBottom: "12px",
   },
   phoneEvent: {
     backgroundColor: "rgba(27, 94, 32, 0.1)",
-    borderRadius: "14px",
-    padding: "14px",
-    fontSize: "15px",
+    borderRadius: "16px",
+    padding: "16px",
+    fontSize: "16px",
     fontWeight: 700,
     color: colors.verde,
-    marginBottom: "16px",
+    marginBottom: "18px",
   },
   phoneWhatsapp: {
     backgroundColor: "#25D366",
     color: colors.white,
-    borderRadius: "14px",
-    padding: "14px",
-    fontSize: "16px",
+    borderRadius: "16px",
+    padding: "18px",
+    fontSize: "18px",
     fontWeight: 800,
     textAlign: "center",
   },
-  section: {
-    padding: "52px 0",
+
+  /* SECTIONS */
+  sectionLight: {
+    backgroundColor: colors.white,
+    padding: "90px 0",
+  },
+  sectionGray: {
+    backgroundColor: colors.gris,
+    padding: "90px 0",
+  },
+  sectionBase: {
+    backgroundColor: colors.bg,
+    padding: "90px 0",
   },
   sectionTitle: {
-    fontSize: "36px",
-    fontWeight: 800,
-    margin: "0 0 14px",
-    color: colors.verde,
+    fontSize: "40px",
+    fontWeight: 900,
+    margin: "0 0 16px",
+    color: colors.terracotaDark,
     textAlign: "center",
   },
   sectionSubtitle: {
-    fontSize: "18px",
+    fontSize: "19px",
     color: colors.muted,
     textAlign: "center",
-    margin: "0 auto 40px",
-    maxWidth: "640px",
+    margin: "0 auto 56px",
+    maxWidth: "680px",
+    lineHeight: 1.6,
   },
   metricsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-    gap: "26px",
+    gap: "32px",
   },
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-    gap: "28px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))",
+    gap: "32px",
   },
   card: {
     backgroundColor: colors.white,
-    borderRadius: "22px",
+    borderRadius: "20px",
     padding: "32px",
-    boxShadow: "0 18px 44px rgba(43, 33, 24, 0.1)",
+    boxShadow: "0 24px 60px rgba(43, 33, 24, 0.16)",
+    boxSizing: "border-box",
+  },
+  cardOnWhite: {
+    backgroundColor: colors.bg,
+    borderRadius: "20px",
+    padding: "32px",
+    boxShadow: "0 24px 60px rgba(43, 33, 24, 0.12)",
     boxSizing: "border-box",
   },
   metricNumber: {
-    fontSize: "42px",
+    fontSize: "48px",
     fontWeight: 900,
     color: colors.terracota,
-    margin: "0 0 8px",
+    margin: "0 0 10px",
   },
   metricLabel: {
-    fontSize: "17px",
+    fontSize: "18px",
     fontWeight: 600,
     color: colors.texto,
     margin: 0,
   },
   cardTitle: {
-    fontSize: "22px",
+    fontSize: "24px",
     fontWeight: 800,
-    margin: "0 0 10px",
+    margin: "0 0 12px",
     color: colors.verde,
   },
   cardText: {
-    fontSize: "16px",
-    lineHeight: 1.55,
+    fontSize: "17px",
+    lineHeight: 1.6,
     margin: 0,
     color: colors.texto,
   },
   pill: {
     display: "inline-block",
-    backgroundColor: "rgba(166, 75, 42, 0.1)",
+    backgroundColor: "rgba(166, 75, 42, 0.12)",
     color: colors.terracota,
     borderRadius: "999px",
-    padding: "12px 22px",
-    fontSize: "16px",
+    padding: "14px 26px",
+    fontSize: "17px",
     fontWeight: 700,
-    margin: "6px",
+    margin: "8px",
   },
   pillWrap: {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: "4px",
+    gap: "6px",
+  },
+
+  /* CTA */
+  ctaSection: {
+    backgroundColor: colors.bg,
+    padding: "90px 0",
   },
   cta: {
-    backgroundColor: colors.terracota,
+    background:
+      "linear-gradient(135deg, #A64B2A 0%, #6E2E18 100%)",
     color: colors.white,
-    borderRadius: "28px",
-    padding: "60px 44px",
+    borderRadius: "32px",
+    padding: "80px 48px",
     textAlign: "center",
-    boxShadow: "0 24px 56px rgba(166, 75, 42, 0.35)",
-    margin: "32px 0",
+    boxShadow: "0 32px 70px rgba(166, 75, 42, 0.4)",
     boxSizing: "border-box",
   },
   ctaText: {
-    fontSize: "32px",
-    fontWeight: 800,
-    lineHeight: 1.3,
-    margin: 0,
-    maxWidth: "860px",
+    fontSize: "38px",
+    fontWeight: 900,
+    lineHeight: 1.25,
+    margin: "0 0 36px",
+    maxWidth: "900px",
     marginLeft: "auto",
     marginRight: "auto",
   },
   footer: {
-    padding: "40px 0 64px",
+    backgroundColor: colors.texto,
+    padding: "48px 0",
     textAlign: "center",
-    fontSize: "15px",
-    color: colors.muted,
+    fontSize: "16px",
+    color: "rgba(255,255,255,0.75)",
   },
 };
 
@@ -389,48 +448,63 @@ export default function ClientDemoV3Page() {
       </header>
 
       <main>
-        <section style={styles.container}>
-          <div style={styles.heroWrap}>
-            <div>
-              <h1 style={styles.heroTitle}>
-                Una app turística para vivir Pueblito Boyacense
-              </h1>
-              <p style={styles.heroText}>
-                Servicios, eventos, cultura, gastronomía y experiencias locales
-                en una plataforma móvil administrada profesionalmente.
-              </p>
-              <div style={styles.heroButtons}>
-                <button style={styles.btnPrimary}>
-                  Ver experiencia turística
-                </button>
-                <button style={styles.btnSecondary}>
-                  Ver panel administrado
-                </button>
+        {/* HERO FULL WIDTH */}
+        <section style={styles.hero}>
+          <div style={styles.container}>
+            <div style={styles.heroGrid}>
+              <div>
+                <span style={styles.heroBadge}>
+                  Turismo · Cultura · Gastronomía
+                </span>
+                <h1 style={styles.heroTitle}>
+                  Una app turística para vivir Pueblito Boyacense
+                </h1>
+                <p style={styles.heroText}>
+                  Servicios, eventos, cultura, gastronomía y experiencias
+                  locales en una plataforma móvil administrada
+                  profesionalmente.
+                </p>
+                <div style={styles.heroButtons}>
+                  <button style={styles.btnPrimary}>
+                    Ver experiencia turística
+                  </button>
+                  <button style={styles.btnSecondary}>
+                    Ver panel administrado
+                  </button>
+                </div>
               </div>
-            </div>
 
-            <div style={styles.phoneWrap}>
-              <div style={styles.phone}>
-                <div style={styles.phoneNotch} />
-                <div style={styles.phoneHeader}>Pueblito Boyacense</div>
-                <p style={styles.phoneLabel}>Servicios destacados</p>
-                <div style={styles.phoneItem}>Restaurante Boyacense</div>
-                <div style={styles.phoneItem}>Hospedaje Colonial</div>
-                <div style={styles.phoneItem}>Café Colonial</div>
-                <p style={styles.phoneLabel}>Evento próximo</p>
-                <div style={styles.phoneEvent}>Bazarte — Este fin de semana</div>
-                <div style={styles.phoneWhatsapp}>WhatsApp</div>
+              <div style={styles.phoneWrap}>
+                <div style={styles.phone}>
+                  <div style={styles.phoneScreen}>
+                    <div style={styles.phoneNotch} />
+                    <div style={styles.phoneHeader}>Pueblito Boyacense</div>
+                    <p style={styles.phoneLabel}>Servicios destacados</p>
+                    <div style={styles.phoneItem}>Restaurante Boyacense</div>
+                    <div style={styles.phoneItem}>Hospedaje Colonial</div>
+                    <div style={styles.phoneItem}>Café Colonial</div>
+                    <p style={styles.phoneLabel}>Evento próximo</p>
+                    <div style={styles.phoneEvent}>
+                      Bazarte — Este fin de semana
+                    </div>
+                    <div style={styles.phoneWhatsapp}>WhatsApp</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.section}>
+        {/* MÉTRICAS — fondo blanco */}
+        <section style={styles.sectionLight}>
+          <div style={styles.container}>
             <h2 style={styles.sectionTitle}>En cifras</h2>
+            <p style={styles.sectionSubtitle}>
+              Una plataforma con presencia real en todo el Pueblito.
+            </p>
             <div style={styles.metricsGrid}>
               {metricas.map((m) => (
-                <div key={m.label} style={styles.card}>
+                <div key={m.label} style={styles.cardOnWhite}>
                   <p style={styles.metricNumber}>{m.number}</p>
                   <p style={styles.metricLabel}>{m.label}</p>
                 </div>
@@ -439,8 +513,9 @@ export default function ClientDemoV3Page() {
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.section}>
+        {/* EXPERIENCIA — fondo gris */}
+        <section style={styles.sectionGray}>
+          <div style={styles.container}>
             <h2 style={styles.sectionTitle}>Experiencia del visitante</h2>
             <p style={styles.sectionSubtitle}>
               Todo lo que el turista necesita, en un solo lugar.
@@ -457,12 +532,16 @@ export default function ClientDemoV3Page() {
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.section}>
+        {/* SERVICIOS — fondo blanco */}
+        <section style={styles.sectionLight}>
+          <div style={styles.container}>
             <h2 style={styles.sectionTitle}>Servicios destacados</h2>
+            <p style={styles.sectionSubtitle}>
+              Lo mejor del Pueblito, listo para descubrir.
+            </p>
             <div style={styles.grid}>
               {servicios.map((s) => (
-                <div key={s.title} style={styles.card}>
+                <div key={s.title} style={styles.cardOnWhite}>
                   <h3 style={styles.cardTitle}>{s.title}</h3>
                   <p style={styles.cardText}>{s.text}</p>
                 </div>
@@ -471,9 +550,13 @@ export default function ClientDemoV3Page() {
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.section}>
+        {/* EVENTOS — fondo gris */}
+        <section style={styles.sectionGray}>
+          <div style={styles.container}>
             <h2 style={styles.sectionTitle}>Eventos</h2>
+            <p style={styles.sectionSubtitle}>
+              Una agenda cultural viva durante todo el año.
+            </p>
             <div style={styles.grid}>
               {eventos.map((e) => (
                 <div key={e.title} style={styles.card}>
@@ -485,8 +568,9 @@ export default function ClientDemoV3Page() {
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.section}>
+        {/* PANEL — fondo blanco */}
+        <section style={styles.sectionLight}>
+          <div style={styles.container}>
             <h2 style={styles.sectionTitle}>Panel administrado</h2>
             <p style={styles.sectionSubtitle}>
               Una plataforma gestionada profesionalmente para mantener todo al
@@ -494,7 +578,7 @@ export default function ClientDemoV3Page() {
             </p>
             <div style={styles.grid}>
               {panel.map((p) => (
-                <div key={p.title} style={styles.card}>
+                <div key={p.title} style={styles.cardOnWhite}>
                   <h3 style={styles.cardTitle}>{p.title}</h3>
                   <p style={styles.cardText}>{p.text}</p>
                 </div>
@@ -503,12 +587,16 @@ export default function ClientDemoV3Page() {
           </div>
         </section>
 
-        <section style={styles.container}>
-          <div style={styles.cta}>
-            <p style={styles.ctaText}>
-              Una solución digital administrada para fortalecer el turismo del
-              Pueblito Boyacense.
-            </p>
+        {/* CTA FINAL */}
+        <section style={styles.ctaSection}>
+          <div style={styles.container}>
+            <div style={styles.cta}>
+              <p style={styles.ctaText}>
+                Una solución digital administrada para fortalecer el turismo del
+                Pueblito Boyacense.
+              </p>
+              <button style={styles.btnPrimary}>Solicitar demo</button>
+            </div>
           </div>
         </section>
 
