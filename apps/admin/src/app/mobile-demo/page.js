@@ -13,6 +13,112 @@ const colors = {
   line: "rgba(43, 33, 24, 0.08)",
 };
 
+/* ============ ICONOS SVG INLINE (outline minimalistas) ============ */
+function Icon({ name, size = 22, color = colors.texto, stroke = 2 }) {
+  const common = {
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: color,
+    strokeWidth: stroke,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  };
+  switch (name) {
+    case "home":
+      return (
+        <svg {...common}>
+          <path d="M3 10.5 12 3l9 7.5" />
+          <path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5" />
+          <path d="M9.5 21v-6h5v6" />
+        </svg>
+      );
+    case "services":
+      return (
+        <svg {...common}>
+          <path d="M4 3v7a3 3 0 0 0 3 3v8" />
+          <path d="M4 3v4M7 3v4" />
+          <path d="M17 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4v9" />
+        </svg>
+      );
+    case "events":
+      return (
+        <svg {...common}>
+          <rect x="3.5" y="5" width="17" height="15" rx="2" />
+          <path d="M3.5 9h17" />
+          <path d="M8 3v4M16 3v4" />
+        </svg>
+      );
+    case "plazas":
+      return (
+        <svg {...common}>
+          <path d="M3 21h18" />
+          <path d="M5 21V10l7-5 7 5v11" />
+          <path d="M9.5 21v-5h5v5" />
+        </svg>
+      );
+    case "whatsapp":
+      return (
+        <svg {...common}>
+          <path d="M4 20l1.4-4A8 8 0 1 1 8 18.6L4 20z" />
+          <path d="M9 9.5c.3 2 1.5 3.2 3.5 3.8" stroke={color} />
+        </svg>
+      );
+    case "location":
+      return (
+        <svg {...common}>
+          <path d="M12 21s-6-5-6-10a6 6 0 0 1 12 0c0 5-6 10-6 10z" />
+          <circle cx="12" cy="11" r="2.2" />
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 8v4l2.5 2" />
+        </svg>
+      );
+    case "star":
+      return (
+        <svg {...common}>
+          <path d="M12 4l2.3 4.7 5.2.8-3.8 3.7.9 5.1L12 16.8 7.4 18.1l.9-5.1L4.5 9.5l5.2-.8L12 4z" />
+        </svg>
+      );
+    case "parking":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="16" height="16" rx="3" />
+          <path d="M10 16V8h3a2.5 2.5 0 0 1 0 5h-3" />
+        </svg>
+      );
+    case "culture":
+      return (
+        <svg {...common}>
+          <path d="M5 21h14" />
+          <path d="M6 21v-9M10 21v-9M14 21v-9M18 21v-9" />
+          <path d="M4 12h16" />
+          <path d="M12 3l8 4H4l8-4z" />
+        </svg>
+      );
+    case "available":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="8" />
+          <path d="M8.5 12l2.5 2.5 4.5-5" />
+        </svg>
+      );
+    case "back":
+      return (
+        <svg {...common}>
+          <path d="M15 5l-7 7 7 7" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 const styles = {
   canvas: {
     backgroundColor: "#241B14",
@@ -39,7 +145,6 @@ const styles = {
     flexDirection: "column",
   },
 
-  /* Header elegante con degradado */
   header: {
     background: "linear-gradient(135deg, #A64B2A 0%, #6E2E18 100%)",
     color: colors.white,
@@ -64,8 +169,9 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "20px",
+    fontSize: "16px",
     fontWeight: 900,
+    letterSpacing: "0.5px",
   },
   headerTitle: {
     fontSize: "20px",
@@ -86,7 +192,6 @@ const styles = {
     boxSizing: "border-box",
   },
 
-  /* Home */
   welcome: {
     fontSize: "26px",
     fontWeight: 900,
@@ -118,23 +223,22 @@ const styles = {
   quickCard: {
     backgroundColor: colors.white,
     borderRadius: "18px",
-    padding: "16px 10px",
+    padding: "18px 10px",
     boxShadow: "0 10px 24px rgba(43, 33, 24, 0.1)",
     cursor: "pointer",
     textAlign: "center",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "8px",
+    gap: "10px",
   },
   quickIcon: {
-    width: "42px",
-    height: "42px",
+    width: "44px",
+    height: "44px",
     borderRadius: "12px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "20px",
   },
   quickLabel: {
     fontSize: "13px",
@@ -143,7 +247,6 @@ const styles = {
     margin: 0,
   },
 
-  /* Page title */
   pageTitle: {
     fontSize: "24px",
     fontWeight: 900,
@@ -151,7 +254,6 @@ const styles = {
     margin: "4px 0 18px",
   },
 
-  /* Cards */
   card: {
     backgroundColor: colors.white,
     borderRadius: "20px",
@@ -163,12 +265,29 @@ const styles = {
   cardHead: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: "10px",
-    marginBottom: "8px",
+    marginBottom: "10px",
+  },
+  cardTitleWrap: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    flex: 1,
+    minWidth: 0,
+  },
+  cardIcon: {
+    width: "36px",
+    height: "36px",
+    borderRadius: "10px",
+    backgroundColor: "rgba(166, 75, 42, 0.1)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
   },
   cardTitle: {
-    fontSize: "19px",
+    fontSize: "18px",
     fontWeight: 800,
     color: colors.verde,
     margin: 0,
@@ -180,36 +299,17 @@ const styles = {
     margin: "0 0 16px",
   },
 
-  /* Badges */
-  badgeDestacado: {
-    backgroundColor: "rgba(166, 75, 42, 0.12)",
-    color: colors.terracota,
+  badgeBase: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "5px",
     borderRadius: "999px",
-    padding: "5px 12px",
+    padding: "5px 11px",
     fontSize: "12px",
-    fontWeight: 800,
-    whiteSpace: "nowrap",
-  },
-  badgeCultural: {
-    backgroundColor: "rgba(27, 94, 32, 0.12)",
-    color: colors.verde,
-    borderRadius: "999px",
-    padding: "5px 12px",
-    fontSize: "12px",
-    fontWeight: 800,
-    whiteSpace: "nowrap",
-  },
-  badgeDisponible: {
-    backgroundColor: "rgba(37, 211, 102, 0.15)",
-    color: "#128C3E",
-    borderRadius: "999px",
-    padding: "5px 12px",
-    fontSize: "12px",
-    fontWeight: 800,
+    fontWeight: 700,
     whiteSpace: "nowrap",
   },
 
-  /* Buttons */
   btnFull: {
     backgroundColor: colors.terracota,
     color: colors.white,
@@ -239,14 +339,16 @@ const styles = {
     color: colors.terracotaDark,
     border: "2px solid " + colors.terracotaDark,
     borderRadius: "14px",
-    padding: "12px 18px",
+    padding: "11px 18px",
     fontSize: "15px",
     fontWeight: 700,
     cursor: "pointer",
     marginBottom: "18px",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
   },
 
-  /* Highlight (próximo evento) */
   eventBanner: {
     background: "linear-gradient(135deg, #1B5E20 0%, #0F3D14 100%)",
     color: colors.white,
@@ -254,6 +356,7 @@ const styles = {
     padding: "22px",
     boxShadow: "0 16px 34px rgba(27, 94, 32, 0.32)",
     marginBottom: "8px",
+    cursor: "pointer",
   },
   eventBannerLabel: {
     fontSize: "12px",
@@ -275,7 +378,6 @@ const styles = {
     opacity: 0.92,
   },
 
-  /* Info útil */
   infoItem: {
     backgroundColor: colors.white,
     borderRadius: "16px",
@@ -283,11 +385,18 @@ const styles = {
     boxShadow: "0 8px 20px rgba(43, 33, 24, 0.08)",
     marginBottom: "12px",
     display: "flex",
-    gap: "12px",
+    gap: "14px",
     alignItems: "center",
   },
   infoIcon: {
-    fontSize: "22px",
+    width: "40px",
+    height: "40px",
+    borderRadius: "12px",
+    backgroundColor: "rgba(27, 94, 32, 0.1)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
   },
   infoTextWrap: { flex: 1 },
   infoTitle: {
@@ -302,12 +411,11 @@ const styles = {
     margin: 0,
   },
 
-  /* Detail */
   detailTitle: {
-    fontSize: "26px",
+    fontSize: "24px",
     fontWeight: 900,
     color: colors.terracotaDark,
-    margin: "0 0 6px",
+    margin: 0,
   },
   detailDesc: {
     fontSize: "16px",
@@ -319,6 +427,19 @@ const styles = {
     marginBottom: "14px",
     borderBottom: "1px solid " + colors.line,
     paddingBottom: "14px",
+    display: "flex",
+    gap: "12px",
+    alignItems: "flex-start",
+  },
+  detailRowIcon: {
+    width: "34px",
+    height: "34px",
+    borderRadius: "10px",
+    backgroundColor: "rgba(166, 75, 42, 0.1)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
   },
   detailLabel: {
     display: "block",
@@ -327,50 +448,50 @@ const styles = {
     color: colors.verde,
     textTransform: "uppercase",
     letterSpacing: "0.6px",
-    marginBottom: "4px",
+    marginBottom: "3px",
   },
   detailValue: {
-    fontSize: "16px",
+    fontSize: "15px",
     color: colors.texto,
     margin: 0,
   },
   whatsapp: {
-    backgroundColor: "#25D366",
+    backgroundColor: "#1B7F43",
     color: colors.white,
     border: "none",
     borderRadius: "14px",
-    padding: "18px",
+    padding: "16px",
     fontSize: "17px",
     fontWeight: 800,
     cursor: "pointer",
     width: "100%",
     marginTop: "16px",
-    boxShadow: "0 10px 24px rgba(37, 211, 102, 0.4)",
+    boxShadow: "0 10px 24px rgba(27, 127, 67, 0.4)",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
   },
 
-  /* FAB WhatsApp */
   fab: {
     position: "fixed",
     bottom: "92px",
     left: "50%",
     transform: "translateX(135px)",
-    width: "60px",
-    height: "60px",
+    width: "58px",
+    height: "58px",
     borderRadius: "50%",
-    backgroundColor: "#25D366",
+    backgroundColor: "#1B7F43",
     color: colors.white,
     border: "none",
-    fontSize: "26px",
-    fontWeight: 900,
     cursor: "pointer",
-    boxShadow: "0 12px 28px rgba(37, 211, 102, 0.5)",
+    boxShadow: "0 12px 28px rgba(27, 127, 67, 0.5)",
     zIndex: 25,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
 
-  /* Bottom nav */
   bottomNav: {
     position: "fixed",
     bottom: 0,
@@ -398,10 +519,6 @@ const styles = {
     padding: "6px 4px",
     flex: 1,
   },
-  navIcon: {
-    fontSize: "20px",
-    lineHeight: 1,
-  },
   navLabel: {
     fontSize: "11px",
     fontWeight: 700,
@@ -410,7 +527,7 @@ const styles = {
     width: "20px",
     height: "3px",
     borderRadius: "999px",
-    marginTop: "2px",
+    marginTop: "1px",
   },
 };
 
@@ -418,7 +535,7 @@ const servicios = [
   {
     id: "restaurante-boyacense",
     title: "Restaurante Boyacense",
-    icon: "🍽️",
+    icon: "services",
     badge: "Destacado",
     text: "Cocina tradicional de la región con sabores auténticos del altiplano.",
     horario: "Lunes a Domingo · 8:00 a.m. - 9:00 p.m.",
@@ -427,7 +544,7 @@ const servicios = [
   {
     id: "hospedaje-colonial",
     title: "Hospedaje Colonial",
-    icon: "🏨",
+    icon: "home",
     badge: "Disponible",
     text: "Habitaciones acogedoras con arquitectura colonial y atención cálida.",
     horario: "Recepción 24 horas",
@@ -436,7 +553,7 @@ const servicios = [
   {
     id: "cafe-colonial",
     title: "Café Colonial",
-    icon: "☕",
+    icon: "clock",
     badge: "Destacado",
     text: "El mejor café de origen acompañado de repostería artesanal.",
     horario: "Lunes a Domingo · 7:00 a.m. - 8:00 p.m.",
@@ -445,7 +562,7 @@ const servicios = [
   {
     id: "artesanias-del-pueblito",
     title: "Artesanías del Pueblito",
-    icon: "🧶",
+    icon: "culture",
     badge: "Cultural",
     text: "Piezas hechas a mano que reflejan la cultura y tradición boyacense.",
     horario: "Lunes a Domingo · 9:00 a.m. - 7:00 p.m.",
@@ -454,7 +571,7 @@ const servicios = [
   {
     id: "spa-andino",
     title: "Spa Andino",
-    icon: "🌿",
+    icon: "available",
     badge: "Disponible",
     text: "Experiencias de relajación inspiradas en tradiciones andinas.",
     horario: "Lunes a Domingo · 10:00 a.m. - 8:00 p.m.",
@@ -463,7 +580,7 @@ const servicios = [
   {
     id: "capilla-san-francisco",
     title: "Capilla San Francisco",
-    icon: "⛪",
+    icon: "plazas",
     badge: "Cultural",
     text: "Espacio de fe y arquitectura colonial para visitar y contemplar.",
     horario: "Lunes a Domingo · 7:00 a.m. - 6:00 p.m.",
@@ -535,33 +652,70 @@ const plazas = [
 
 const infoUtil = [
   {
-    icon: "🕐",
+    icon: "clock",
     title: "Horario general",
     text: "Abierto todos los días de 8:00 a.m. a 9:00 p.m.",
   },
   {
-    icon: "📍",
+    icon: "location",
     title: "Ubicación",
     text: "Duitama, Boyacá — entrada principal señalizada.",
   },
   {
-    icon: "🅿️",
+    icon: "parking",
     title: "Parqueadero",
     text: "Zona de parqueo disponible para visitantes.",
   },
 ];
 
 const navItems = [
-  { key: "home", label: "Inicio", icon: "🏠" },
-  { key: "services", label: "Servicios", icon: "🍽️" },
-  { key: "events", label: "Eventos", icon: "🎉" },
-  { key: "plazas", label: "Plazoletas", icon: "🏛️" },
+  { key: "home", label: "Inicio", icon: "home" },
+  { key: "services", label: "Servicios", icon: "services" },
+  { key: "events", label: "Eventos", icon: "events" },
+  { key: "plazas", label: "Plazoletas", icon: "plazas" },
 ];
 
-function badgeStyle(badge) {
-  if (badge === "Destacado") return styles.badgeDestacado;
-  if (badge === "Cultural") return styles.badgeCultural;
-  return styles.badgeDisponible;
+function Badge({ badge }) {
+  if (badge === "Destacado") {
+    return (
+      <span
+        style={{
+          ...styles.badgeBase,
+          backgroundColor: "rgba(166, 75, 42, 0.12)",
+          color: colors.terracota,
+        }}
+      >
+        <Icon name="star" size={13} color={colors.terracota} />
+        Destacado
+      </span>
+    );
+  }
+  if (badge === "Cultural") {
+    return (
+      <span
+        style={{
+          ...styles.badgeBase,
+          backgroundColor: "rgba(27, 94, 32, 0.12)",
+          color: colors.verde,
+        }}
+      >
+        <Icon name="culture" size={13} color={colors.verde} />
+        Cultural
+      </span>
+    );
+  }
+  return (
+    <span
+      style={{
+        ...styles.badgeBase,
+        backgroundColor: "rgba(27, 94, 32, 0.1)",
+        color: colors.verde,
+      }}
+    >
+      <Icon name="available" size={13} color={colors.verde} />
+      Disponible
+    </span>
+  );
 }
 
 export default function MobileDemoPage() {
@@ -619,7 +773,7 @@ export default function MobileDemoPage() {
                       backgroundColor: "rgba(166, 75, 42, 0.12)",
                     }}
                   >
-                    🍽️
+                    <Icon name="services" size={22} color={colors.terracota} />
                   </span>
                   <p style={styles.quickLabel}>Servicios</p>
                 </div>
@@ -630,7 +784,7 @@ export default function MobileDemoPage() {
                       backgroundColor: "rgba(27, 94, 32, 0.12)",
                     }}
                   >
-                    🎉
+                    <Icon name="events" size={22} color={colors.verde} />
                   </span>
                   <p style={styles.quickLabel}>Eventos</p>
                 </div>
@@ -641,7 +795,7 @@ export default function MobileDemoPage() {
                       backgroundColor: "rgba(166, 75, 42, 0.12)",
                     }}
                   >
-                    🏛️
+                    <Icon name="plazas" size={22} color={colors.terracota} />
                   </span>
                   <p style={styles.quickLabel}>Plazoletas</p>
                 </div>
@@ -651,10 +805,13 @@ export default function MobileDemoPage() {
               {servicios.slice(0, 3).map((s) => (
                 <div key={s.id} style={styles.card}>
                   <div style={styles.cardHead}>
-                    <h3 style={styles.cardTitle}>
-                      {s.icon} {s.title}
-                    </h3>
-                    <span style={badgeStyle(s.badge)}>{s.badge}</span>
+                    <div style={styles.cardTitleWrap}>
+                      <span style={styles.cardIcon}>
+                        <Icon name={s.icon} size={18} color={colors.terracota} />
+                      </span>
+                      <h3 style={styles.cardTitle}>{s.title}</h3>
+                    </div>
+                    <Badge badge={s.badge} />
                   </div>
                   <p style={styles.cardText}>{s.text}</p>
                   <button
@@ -687,7 +844,9 @@ export default function MobileDemoPage() {
               <p style={styles.sectionLabel}>Información útil</p>
               {infoUtil.map((i) => (
                 <div key={i.title} style={styles.infoItem}>
-                  <span style={styles.infoIcon}>{i.icon}</span>
+                  <span style={styles.infoIcon}>
+                    <Icon name={i.icon} size={20} color={colors.verde} />
+                  </span>
                   <div style={styles.infoTextWrap}>
                     <p style={styles.infoTitle}>{i.title}</p>
                     <p style={styles.infoText}>{i.text}</p>
@@ -704,10 +863,13 @@ export default function MobileDemoPage() {
               {servicios.map((s) => (
                 <div key={s.id} style={styles.card}>
                   <div style={styles.cardHead}>
-                    <h3 style={styles.cardTitle}>
-                      {s.icon} {s.title}
-                    </h3>
-                    <span style={badgeStyle(s.badge)}>{s.badge}</span>
+                    <div style={styles.cardTitleWrap}>
+                      <span style={styles.cardIcon}>
+                        <Icon name={s.icon} size={18} color={colors.terracota} />
+                      </span>
+                      <h3 style={styles.cardTitle}>{s.title}</h3>
+                    </div>
+                    <Badge badge={s.badge} />
                   </div>
                   <p style={styles.cardText}>{s.text}</p>
                   <button
@@ -731,27 +893,48 @@ export default function MobileDemoPage() {
                 style={styles.btnBack}
                 onClick={() => setView("services")}
               >
-                ← Volver
+                <Icon name="back" size={16} color={colors.terracotaDark} />
+                Volver
               </button>
               <div style={styles.card}>
                 <div style={styles.cardHead}>
-                  <h2 style={styles.detailTitle}>
-                    {selectedService.icon} {selectedService.title}
-                  </h2>
-                  <span style={badgeStyle(selectedService.badge)}>
-                    {selectedService.badge}
-                  </span>
+                  <div style={styles.cardTitleWrap}>
+                    <span style={styles.cardIcon}>
+                      <Icon
+                        name={selectedService.icon}
+                        size={18}
+                        color={colors.terracota}
+                      />
+                    </span>
+                    <h2 style={styles.detailTitle}>{selectedService.title}</h2>
+                  </div>
+                  <Badge badge={selectedService.badge} />
                 </div>
                 <p style={styles.detailDesc}>{selectedService.text}</p>
                 <div style={styles.detailRow}>
-                  <span style={styles.detailLabel}>Horario</span>
-                  <p style={styles.detailValue}>{selectedService.horario}</p>
+                  <span style={styles.detailRowIcon}>
+                    <Icon name="clock" size={16} color={colors.terracota} />
+                  </span>
+                  <div>
+                    <span style={styles.detailLabel}>Horario</span>
+                    <p style={styles.detailValue}>{selectedService.horario}</p>
+                  </div>
                 </div>
                 <div style={styles.detailRow}>
-                  <span style={styles.detailLabel}>Ubicación</span>
-                  <p style={styles.detailValue}>{selectedService.ubicacion}</p>
+                  <span style={styles.detailRowIcon}>
+                    <Icon name="location" size={16} color={colors.terracota} />
+                  </span>
+                  <div>
+                    <span style={styles.detailLabel}>Ubicación</span>
+                    <p style={styles.detailValue}>
+                      {selectedService.ubicacion}
+                    </p>
+                  </div>
                 </div>
-                <button style={styles.whatsapp}>Contactar por WhatsApp</button>
+                <button style={styles.whatsapp}>
+                  <Icon name="whatsapp" size={20} color={colors.white} />
+                  Contactar por WhatsApp
+                </button>
               </div>
             </>
           )}
@@ -763,8 +946,18 @@ export default function MobileDemoPage() {
               {eventos.map((e) => (
                 <div key={e.id} style={styles.card}>
                   <div style={styles.cardHead}>
-                    <h3 style={styles.cardTitle}>{e.title}</h3>
-                    <span style={styles.badgeCultural}>Cultural</span>
+                    <div style={styles.cardTitleWrap}>
+                      <span
+                        style={{
+                          ...styles.cardIcon,
+                          backgroundColor: "rgba(27, 94, 32, 0.1)",
+                        }}
+                      >
+                        <Icon name="events" size={18} color={colors.verde} />
+                      </span>
+                      <h3 style={styles.cardTitle}>{e.title}</h3>
+                    </div>
+                    <Badge badge="Cultural" />
                   </div>
                   <p style={styles.cardText}>{e.text}</p>
                   <button
@@ -785,21 +978,42 @@ export default function MobileDemoPage() {
           {view === "eventDetail" && selectedEvent && (
             <>
               <button style={styles.btnBack} onClick={() => setView("events")}>
-                ← Volver
+                <Icon name="back" size={16} color={colors.terracotaDark} />
+                Volver
               </button>
               <div style={styles.card}>
                 <div style={styles.cardHead}>
-                  <h2 style={styles.detailTitle}>{selectedEvent.title}</h2>
-                  <span style={styles.badgeCultural}>Cultural</span>
+                  <div style={styles.cardTitleWrap}>
+                    <span
+                      style={{
+                        ...styles.cardIcon,
+                        backgroundColor: "rgba(27, 94, 32, 0.1)",
+                      }}
+                    >
+                      <Icon name="events" size={18} color={colors.verde} />
+                    </span>
+                    <h2 style={styles.detailTitle}>{selectedEvent.title}</h2>
+                  </div>
+                  <Badge badge="Cultural" />
                 </div>
                 <p style={styles.detailDesc}>{selectedEvent.text}</p>
                 <div style={styles.detailRow}>
-                  <span style={styles.detailLabel}>Fecha</span>
-                  <p style={styles.detailValue}>{selectedEvent.fecha}</p>
+                  <span style={styles.detailRowIcon}>
+                    <Icon name="clock" size={16} color={colors.terracota} />
+                  </span>
+                  <div>
+                    <span style={styles.detailLabel}>Fecha</span>
+                    <p style={styles.detailValue}>{selectedEvent.fecha}</p>
+                  </div>
                 </div>
                 <div style={styles.detailRow}>
-                  <span style={styles.detailLabel}>Lugar</span>
-                  <p style={styles.detailValue}>{selectedEvent.lugar}</p>
+                  <span style={styles.detailRowIcon}>
+                    <Icon name="location" size={16} color={colors.terracota} />
+                  </span>
+                  <div>
+                    <span style={styles.detailLabel}>Lugar</span>
+                    <p style={styles.detailValue}>{selectedEvent.lugar}</p>
+                  </div>
                 </div>
               </div>
             </>
@@ -812,8 +1026,13 @@ export default function MobileDemoPage() {
               {plazas.map((p) => (
                 <div key={p.id} style={styles.card}>
                   <div style={styles.cardHead}>
-                    <h3 style={styles.cardTitle}>{p.title}</h3>
-                    <span style={styles.badgeCultural}>Cultural</span>
+                    <div style={styles.cardTitleWrap}>
+                      <span style={styles.cardIcon}>
+                        <Icon name="plazas" size={18} color={colors.terracota} />
+                      </span>
+                      <h3 style={styles.cardTitle}>{p.title}</h3>
+                    </div>
+                    <Badge badge="Cultural" />
                   </div>
                   <p style={styles.cardText}>{p.text}</p>
                   <button
@@ -834,12 +1053,18 @@ export default function MobileDemoPage() {
           {view === "plazaDetail" && selectedPlaza && (
             <>
               <button style={styles.btnBack} onClick={() => setView("plazas")}>
-                ← Volver
+                <Icon name="back" size={16} color={colors.terracotaDark} />
+                Volver
               </button>
               <div style={styles.card}>
                 <div style={styles.cardHead}>
-                  <h2 style={styles.detailTitle}>{selectedPlaza.title}</h2>
-                  <span style={styles.badgeCultural}>Cultural</span>
+                  <div style={styles.cardTitleWrap}>
+                    <span style={styles.cardIcon}>
+                      <Icon name="plazas" size={18} color={colors.terracota} />
+                    </span>
+                    <h2 style={styles.detailTitle}>{selectedPlaza.title}</h2>
+                  </div>
+                  <Badge badge="Cultural" />
                 </div>
                 <p style={styles.detailDesc}>{selectedPlaza.text}</p>
               </div>
@@ -850,7 +1075,7 @@ export default function MobileDemoPage() {
         {/* FAB WhatsApp solo en Home */}
         {view === "home" && (
           <button style={styles.fab} aria-label="WhatsApp">
-            💬
+            <Icon name="whatsapp" size={26} color={colors.white} />
           </button>
         )}
 
@@ -858,25 +1083,23 @@ export default function MobileDemoPage() {
         <nav style={styles.bottomNav}>
           {navItems.map((item) => {
             const active = navActive(item.key);
+            const iconColor = active ? colors.terracota : colors.muted;
             return (
               <button
                 key={item.key}
                 style={styles.navBtn}
                 onClick={() => setView(item.key)}
               >
-                <span
-                  style={{
-                    ...styles.navIcon,
-                    filter: active ? "none" : "grayscale(60%)",
-                    opacity: active ? 1 : 0.55,
-                  }}
-                >
-                  {item.icon}
-                </span>
+                <Icon
+                  name={item.icon}
+                  size={22}
+                  color={iconColor}
+                  stroke={active ? 2.2 : 1.8}
+                />
                 <span
                   style={{
                     ...styles.navLabel,
-                    color: active ? colors.terracota : colors.muted,
+                    color: iconColor,
                   }}
                 >
                   {item.label}
